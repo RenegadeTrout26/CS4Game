@@ -1,10 +1,10 @@
 package game.engine.cards;
 
 public abstract class Card { //Parent class of cards 5.13
-	String name;
-	String description;
-	int rarity;
-	boolean lucky;
+	private String name;
+	private String description;
+	private int rarity;
+	private boolean lucky;
 	public Card(String name, String description, int rarity, boolean lucky) {
 		this.name = name;
 		this.description = description;

@@ -4,7 +4,7 @@ public class EnergyStealCard extends Card{
 	//5.15
 	//Represents energy steal cards. Subclass of Card and can modify energy.
 		
-	int energy;
+    private int energy;
 	
 	
 	

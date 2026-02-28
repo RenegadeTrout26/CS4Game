@@ -5,7 +5,7 @@ public class ConfusionCard extends Card{
 
 	//5.17
    //Represents confusion cards that confuse monsters of their role. Subclass of Card
-int  duration;
+private int  duration;
 
 public int getDuration() {
 	return duration;

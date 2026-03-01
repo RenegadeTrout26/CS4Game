@@ -15,19 +15,19 @@ public class Board { //5.21
 	public  ArrayList<Monster> getStationedMonsters() {
 		return stationedMonsters;
 	}
-	public void setStationedMonsters(ArrayList<Monster> stationedMonsters) {
+	public static void setStationedMonsters(ArrayList<Monster> stationedMonsters) {
 		Board.stationedMonsters = stationedMonsters;
 	}
-	public ArrayList<Card> getCards() {
+	public static ArrayList<Card> getCards() {
 		return cards;
 	}
-	public void setCards(ArrayList<Card> cards) {
+	public static void setCards(ArrayList<Card> cards) {
 		Board.cards = cards;
 	}
 	public Cell[][] getBoardCells() {
 		return boardCells;
 	}
-	public ArrayList<Card> getOriginalCards() {
+	public static ArrayList<Card> getOriginalCards() {
 		return originalCards;
 	}
 	

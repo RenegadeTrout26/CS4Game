@@ -1,8 +1,27 @@
 package game.engine.monsters;
+import game.engine.Role;
 
 public class Dasher extends Monster{//5.2
-	public Dasher()
-	{
-		
+	private int momentumTurns; 
+	public Dasher(String name, String description, Role role, int energy){
+	super(name, description,role,energy); 
+        this.momentumTurns = 0;  
 	}
+    
+
+   
+    public int getMomentumTurns() {
+        return momentumTurns;
+    }
+
+    
+    public void setMomentumTurns(int momentumTurns) {
+        if (momentumTurns >= 0) { 
+            this.momentumTurns = momentumTurns;
+        }
+    }
 }
+	
+
+
+

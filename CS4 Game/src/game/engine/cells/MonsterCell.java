@@ -3,7 +3,7 @@ package game.engine.cells;
 import game.engine.monsters.Monster;
 
 public class MonsterCell extends Cell{//5.8
-	 private Monster cellMonster;
+	 private final Monster cellMonster;
 
 public MonsterCell(String name, Monster cellMonster) {
 	super(name);

@@ -3,19 +3,20 @@ package game.engine.monsters;
 import game.engine.Role;
 
 public class MultiTasker extends Monster {//5.4
-	private int Normalspeedturns;
+	private int normalSpeedTurns;
+	
 	public MultiTasker(String name, String description, Role role, int energy){
 		super(name, description, role,energy);
-		this.Normalspeedturns=0;
+		this.normalSpeedTurns=0;
 	}
-	public int getNormalspeedturns() {
-	    return Normalspeedturns;
+	public int getNormalSpeedTurns() {
+	    return normalSpeedTurns;
 	}
 
 
-	public void setNormalspeedturns(int Normalspeedturns) {
-	    if (Normalspeedturns >= 0) {  // optional validation
-	        this.Normalspeedturns = Normalspeedturns;
+	public void setNormalSpeedTurns(int normalSpeedTurns) {
+	    if (normalSpeedTurns >= 0) {  
+	        this.normalSpeedTurns = normalSpeedTurns;
 	    }
 	}
 	

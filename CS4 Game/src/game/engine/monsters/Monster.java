@@ -1,9 +1,10 @@
 package game.engine.monsters;
 
+import game.engine.Constants;
 import game.engine.Role;
 
-public abstract class Monster implements  Comparable {//5.1 Parent Class of all monsters
-	  private String name;
+public abstract class Monster implements  Comparable<Monster> {//5.1 Parent Class of all monsters
+	  private  String name;
 		private String description;
 		 private int energy;
 		 private int position;
@@ -11,9 +12,9 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		 private boolean shielded;
 		private  int confusionTurns;
 		 private Role role;                 
-		 private static Role originalRole;   
+		 private  Role originalRole;   
 
-		// Constructor
+		//constructor
 		    public Monster(String name,String description,Role originalRole,int energy) {
 
 		        this.name = name;
@@ -23,10 +24,11 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		        this.role = originalRole;   
 
 		        
-		        if (energy >= 0) {
+		        if (energy >= Constants.MIN_ENERGY) {
 		            this.energy = energy;
-		        } else {
-		            this.energy = 0;
+		        } 
+		        else {
+		            this.energy = Constants.MIN_ENERGY;
 		        }
 
 		        this.position = 0;          
@@ -36,7 +38,7 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		    }
 
 		    
-
+		    //Getters
 		    public String getName() {
 		        return name;
 		    }
@@ -45,7 +47,7 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		        return description;
 		    }
 
-		    public static Role getOriginalRole() {
+		    public  Role getOriginalRole() {
 		        return originalRole;
 		    }
 
@@ -73,22 +75,26 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		        return confusionTurns;
 		    }
 
-
+		    
+		    //setters
 		    public void setRole(Role role) {
 		        this.role = role;
 		    }
 
-		    public void setEnergy(int energy) {
-		        if (energy >= 0) {
-		            this.energy = energy;
-		        }
-		    }
+			public void setEnergy(int energy) {
+				if(energy>=Constants.MIN_ENERGY)
+					this.energy = energy;
+				else
+					this.energy=Constants.MIN_ENERGY;
+			}
 
-		    public void setPosition(int position) {
-		        if (position >= 0 && position <= 99) {
-		            this.position = position;
-		        }
-		    }
+			public void setPosition(int position) {
+				if(position>=0 && position<=99)
+				this.position = position;
+				else
+					if(position>99)
+						this.position=position%Constants.BOARD_SIZE;
+			}
 
 		    public void setFrozen(boolean frozen) {
 		        this.frozen = frozen;
@@ -103,10 +109,12 @@ public abstract class Monster implements  Comparable {//5.1 Parent Class of all 
 		            this.confusionTurns = confusionTurns;
 		        }
 		    }
-		        
-		        public int compareTo(Object o) {
-		            Monster other = (Monster)o; // you must cast
-		            return Integer.compare(other.getPosition(), this.getPosition());
+		    
+		    
+		    //CompareTo
+		    public int compareTo(Monster o) {
+		             
+		        	return this.position-o.position;
 		        }
 		        
 		    }

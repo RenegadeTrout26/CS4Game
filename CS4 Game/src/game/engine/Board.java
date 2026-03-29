@@ -8,11 +8,14 @@ import java.util.ArrayList;
 
 
 public class Board { //5.21
-	private Cell[][] boardCells;
+	private final Cell[][] boardCells;
 	private static ArrayList<Monster> stationedMonsters;
 	private static ArrayList<Card> originalCards;
-	private static ArrayList<Card> cards;
-	public  ArrayList<Monster> getStationedMonsters() {
+	public static ArrayList<Card> cards;
+	
+	
+	
+	public static  ArrayList<Monster> getStationedMonsters() {
 		return stationedMonsters;
 	}
 	public static void setStationedMonsters(ArrayList<Monster> stationedMonsters) {
@@ -37,7 +40,7 @@ public class Board { //5.21
 		stationedMonsters = new ArrayList<>();
 		cards = new ArrayList<>();
 		originalCards= readCards;
-		
-	}
 	
+	}
+
 }

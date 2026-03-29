@@ -1,6 +1,6 @@
 package game.engine.dataloader;
 
-import game.engine.Role;
+import game.engine.*;
 import game.engine.exceptions.*;
 import game.engine.cards.*;
 import game.engine.cells.*;
@@ -17,30 +17,24 @@ public class DataLoader {
 	
 	public static ArrayList<Card> readCards() throws IOException
 	{
-		ArrayList<Card> arc= new ArrayList<Card>();
-		try(BufferedReader br = new BufferedReader(new FileReader(CARDS_FILE_NAME)))
-		{
+		ArrayList<Card> arc= new ArrayList<>();
+		BufferedReader br = new BufferedReader(new FileReader(CARDS_FILE_NAME));
 			String line;
 			while((line =br.readLine())!= null)
 			{
 				String[] values = line.split(",");
-				try{//line added using AI
 				switch(values[0])
 				{
-				case "SwapperCard": arc.add(new SwapperCard(values[1],values[2],Integer.parseInt(values[3])));break;
-				case "ShieldCard": arc.add(new ShieldCard(values[1],values[2],Integer.parseInt(values[3])));break;
-				case "EnergyStealCard": arc.add(new EnergyStealCard(values[1],values[2],Integer.parseInt(values[3]),Integer.parseInt(values[4])));break;
-				case "StartOverCard": arc.add(new StartOverCard(values[1],values[2],Integer.parseInt(values[3]),Boolean.getBoolean(values[4])));break;
-				case "ConfusionCard": arc.add(new ConfusionCard(values[1],values[2],Integer.parseInt(values[3]),Integer.parseInt(values[4])));break;
-				default: throw new InvalidCSVFormat("Invalid card type: "+ values[0],line); // default statement added using AI
+				case "SWAPPER": arc.add(new SwapperCard(values[1],values[2],Integer.parseInt(values[3])));break;
+				case "SHIELD": arc.add(new ShieldCard(values[1],values[2],Integer.parseInt(values[3])));break;
+				case "ENERGYSTEAL": arc.add(new EnergyStealCard(values[1],values[2],Integer.parseInt(values[3]),Integer.parseInt(values[4])));break;
+				case "STARTOVER": arc.add(new StartOverCard(values[1],values[2],Integer.parseInt(values[3]),Boolean.parseBoolean(values[4])));break;
+				case "CONFUSION": arc.add(new ConfusionCard(values[1],values[2],Integer.parseInt(values[3]),Integer.parseInt(values[4])));break;
+				default: throw new InvalidCSVFormat("Invalid card type: "+line,line); 
 				}
-				}
-				catch(IOException e)
-					{
-					throw new InvalidCSVFormat(line,line);//line added using AI
-					}
+			
 				
-			}
+			
 			
 		}
 		
@@ -50,29 +44,26 @@ public class DataLoader {
 	
 	public static ArrayList<Cell> readCells() throws IOException
 	{
-		ArrayList<Cell> arc= new ArrayList<Cell>();
-		try(BufferedReader br = new BufferedReader(new FileReader(CELLS_FILE_NAME)))
-		{
+		ArrayList<Cell> arc= new ArrayList<>();
+		BufferedReader br = new BufferedReader(new FileReader(CELLS_FILE_NAME));
+		
 			String line;
 			while((line =br.readLine())!= null)
 			{
 				String[] values = line.split(",");
-				try{
+				
 				switch(values.length)
 				{
 				case 2: arc.add((Integer.parseInt(values[1])>0)?new ConveyorBelt(values[0], Integer.parseInt(values[1])):new ContaminationSock(values[0], Integer.parseInt(values[1])));break;
 				case 3: arc.add(new DoorCell(values[0], Role.valueOf(values[1]), Integer.parseInt(values[2])));break;
-				case 1: arc.add(new CardCell(values[0]));break;
-				default: throw new InvalidCSVFormat("Invalid Cell type: "+ values[0],line); 
+			
+				default: throw new InvalidCSVFormat("Invalid Cell type: "+line,line); 
 				}
-				}
-				catch(IOException e)
-				{
-					throw new InvalidCSVFormat(line,line);
-				}
+				
+			
 			}
 			
-		}
+		
 		
 		
 		return arc;
@@ -80,28 +71,25 @@ public class DataLoader {
 	
 	public static ArrayList<Monster> readMonsters() throws IOException
 	{
-		ArrayList<Monster> arc= new ArrayList<Monster>();
-		try(BufferedReader br = new BufferedReader(new FileReader(MONSTERS_FILE_NAME)))
-		{
+		ArrayList<Monster> arc= new ArrayList<>();
+		BufferedReader br = new BufferedReader(new FileReader(MONSTERS_FILE_NAME));
+		
 			String line;
 			while((line =br.readLine())!= null)
 			{
 				String[] values = line.split(",");
-				try{
+				
 				switch(values[0])
 				{
-				case "Dasher": arc.add(new Dasher(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break; //incomplete syntax
-				case "Dynamo": arc.add(new Dynamo(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
-				case "Schemer": arc.add(new Schemer(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
-				case "MultiTasker": arc.add(new MultiTasker(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
-				default: throw new InvalidCSVFormat("Invalid Monster type: "+ values[0],line);
+				case "DASHER": arc.add(new Dasher(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break; 
+				case "DYNAMO": arc.add(new Dynamo(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
+				case "SCHEMER": arc.add(new Schemer(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
+				case "MULTITASKER": arc.add(new MultiTasker(values[1],values[2],Role.valueOf(values[3]),Integer.parseInt(values[4])));break;
+				default: throw new InvalidCSVFormat("Invalid Monster type: "+line,line);
 				}
-				}
-				catch(IOException e)
-				{
-					throw new InvalidCSVFormat(line,line);
-				}
-			}
+				
+			
+			
 			
 		}
 		

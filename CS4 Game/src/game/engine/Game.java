@@ -1,6 +1,7 @@
 package game.engine;
 
 import java.util.*;
+
 import game.engine.dataloader.DataLoader;
 import game.engine.monsters.*;
 
@@ -27,6 +28,7 @@ public class Game { //5.22
 	public Monster getPlayer() {
 		return player;
 	}
+	
 	public Monster getOpponent() {
 		return opponent;
 	}
@@ -53,17 +55,13 @@ public class Game { //5.22
 	
 	private Monster selectRandomMonsterByRole(Role role)
 	{
+		ArrayList<Monster> arm = new ArrayList<>();
+		for (int i = 0; i < allMonsters.size(); i++) {
+			if(allMonsters.get(i).getRole().equals(role))
+				arm.add(allMonsters.get(i));
+		}
 		Random r = new Random();
-		int x=r.nextInt(4);
-		int[] Scarer= {0,2,4,6};
-		int[] Laugher = {1,3,5,7};
-		if(Role.SCARER==role)
-		{
-			return  allMonsters.get(Scarer[x]);
-		}
-		else
-		{
-			return allMonsters.get(Laugher[x]);	
-		}
+		return arm.get(r.nextInt(arm.size()-1));
+	
 	}
 }

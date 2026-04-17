@@ -1,13 +1,14 @@
 package game.engine.exceptions;
 
-public abstract class GameActionException extends Exception {//6.1 Parent class of exceptions
+@SuppressWarnings("serial")
+public abstract class GameActionException extends Exception {
 
-	public GameActionException()
-	{
+	public GameActionException() {
 		super();
 	}
-	public GameActionException(String message)
-	{
+
+	public GameActionException(String message) {
 		super(message);
 	}
+
 }

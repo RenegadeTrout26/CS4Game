@@ -1,17 +1,15 @@
 package game.engine.exceptions;
 
-public class OutOfEnergyException extends GameActionException{//6.4
-	private final static String MSG = "Not Enough Energy for Power Up";
+@SuppressWarnings("serial")
+public class OutOfEnergyException extends GameActionException {
+	private static final String MSG = "Not Enough Energy for Power Up";
 
 	public OutOfEnergyException() {
 		super(MSG);
-		
 	}
 
 	public OutOfEnergyException(String message) {
 		super(message);
-		
 	}
-	
-	
+
 }

@@ -1,13 +1,14 @@
 package game.engine.cells;
 
 import game.engine.Role;
-import game.engine.interfaces.*;;
+import game.engine.interfaces.CanisterModifier;
+import game.engine.monsters.Monster;
 
-public class DoorCell extends Cell implements CanisterModifier{
-	 private final Role role;
-	 private final int energy;
-	 private boolean activated;
-	 
+public class DoorCell extends Cell implements CanisterModifier {
+	private Role role;
+	private int energy;
+	private boolean activated;
+	
 	public DoorCell(String name, Role role, int energy) {
 		super(name);
 		this.role = role;
@@ -15,25 +16,26 @@ public class DoorCell extends Cell implements CanisterModifier{
 		this.activated = false;
 	}
 	
-	public Role getRole(){
+	public Role getRole() {
 		return role;
-		
 	}
 	
-	public int getEnergy(){
+	public int getEnergy() {
 		return energy;
-		
 	}
 	
 	public boolean isActivated() {
 		return activated;
 	}
-	
-	public void setActivated(boolean activated) {
-		if(activated==true && this.activated==false)
-			this.activated=activated;
+
+	public void setActivated(boolean isActivated) {
+		this.activated = isActivated;
+	}
+
+	@Override
+	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
+		// TODO Auto-generated method stub
 		
 	}
-		
-	}
-//Represents doors where monsters collect or lose energy depending on role. Subclass of Cell and can modify canister energy.
+
+}

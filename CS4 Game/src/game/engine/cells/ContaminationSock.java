@@ -14,7 +14,17 @@ public class ContaminationSock extends TransportCell implements CanisterModifier
 		// TODO Auto-generated method stub
 		
 	}
+	public void transport(Monster monster){
+	if (getEffect()>=0){
+	 monster.setPosition(monster.getPosition() + getEffect());
+	}
 	
+	}
+
+	public void onLand(Monster landingMonster, Monster opponentMonster) {
+	
+		
+	}
 
 }
 

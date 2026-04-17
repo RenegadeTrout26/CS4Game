@@ -14,4 +14,7 @@ public class MonsterCell extends Cell {
 		return cellMonster;
 	}
 
+ public void onLand(Monster landingMonster, Monster opponentMonster){
+		 
+	 }
 }

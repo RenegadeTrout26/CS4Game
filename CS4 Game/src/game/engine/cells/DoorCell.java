@@ -37,5 +37,9 @@ public class DoorCell extends Cell implements CanisterModifier {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public  void onLand(Monster landingMonster, Monster opponentMonster){
+		if (activated=false){
+			
+		}
+	}
 }

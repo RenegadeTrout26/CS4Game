@@ -7,3 +7,4 @@ public class CardCell extends Cell {
     }
    
 }
+//bizoo is gay

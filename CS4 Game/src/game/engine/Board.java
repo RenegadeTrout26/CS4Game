@@ -6,7 +6,6 @@ import game.engine.cards.Card;
 import game.engine.cards.SwapperCard;
 import game.engine.cells.*;
 import game.engine.monsters.Monster;
-import game.engine.dataloader.*;
 import game.engine.exceptions.*;
 
 import java.io.*;
@@ -88,7 +87,6 @@ public class Board {
 	
 	public void initializeBoard(ArrayList<Cell> specialCells) throws IOException
 	{
-		ArrayList<Cell> typeOfCells = DataLoader.readCells();
 		ArrayList<ConveyorBelt> conveyors = new ArrayList<>();
 		ArrayList<ContaminationSock> contaminations = new ArrayList<>();
 		ArrayList<DoorCell> doors = new ArrayList<>();
@@ -104,19 +102,19 @@ public class Board {
 			CardCell CC= new CardCell(originalCards.get(i).getName());
 			setCell(Constants.CARD_CELL_INDICES[i],CC);
 		}
-		while(!typeOfCells.isEmpty()) {
-			if(typeOfCells.get(0) instanceof ConveyorBelt)
-				conveyors.add((ConveyorBelt)typeOfCells.remove(0));
+		while(!specialCells.isEmpty()) {
+			if(specialCells.get(0) instanceof ConveyorBelt)
+				conveyors.add((ConveyorBelt)specialCells.remove(0));
 			else{
 				
 			
-			if(typeOfCells.get(0) instanceof ContaminationSock)
-				contaminations.add((ContaminationSock)typeOfCells.remove(0));
+			if(specialCells.get(0) instanceof ContaminationSock)
+				contaminations.add((ContaminationSock)specialCells.remove(0));
 			else
-				if(typeOfCells.get(0) instanceof DoorCell)
-					doors.add((DoorCell)typeOfCells.remove(0));
+				if(specialCells.get(0) instanceof DoorCell)
+					doors.add((DoorCell)specialCells.remove(0));
 				else
-					typeOfCells.remove(0);
+					specialCells.remove(0);
 			}
 		}
 		for (int i = 0; i < Constants.CONVEYOR_CELL_INDICES.length; i++) {
@@ -194,11 +192,31 @@ public class Board {
 	
 	public void moveMonster(Monster currentMonster, int roll, Monster opponentMonster) throws InvalidMoveException{
 		int initialPosition = currentMonster.getPosition();
+		int initalConfusionState = currentMonster.getConfusionTurns();
 		currentMonster.move(roll);
 		if(currentMonster.getPosition()==opponentMonster.getPosition())
 		{
 			currentMonster.setPosition(initialPosition);
-			
+			throw new InvalidMoveException();
 		}
+		else
+		{
+			getCell(currentMonster.getPosition()).onLand(currentMonster, opponentMonster);
+			if(currentMonster.getPosition()==opponentMonster.getPosition()) // just in case a transport occurs
+			{
+				currentMonster.setPosition(initialPosition);
+				throw new InvalidMoveException();
+			}
+			else
+			{
+				int confusion = currentMonster.getConfusionTurns();
+				if(currentMonster.isConfused() && confusion== initalConfusionState)
+				{
+					currentMonster.setConfusionTurns(confusion-1);
+					opponentMonster.setConfusionTurns(confusion-1);
+				}
+			}
+		}
+		updateMonsterPositions(currentMonster, opponentMonster);
 	}
 }

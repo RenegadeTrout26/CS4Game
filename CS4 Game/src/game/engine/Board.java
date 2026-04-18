@@ -127,6 +127,8 @@ public class Board {
 		for (int i = 0; i < boardCells.length; i++) {
 			if(i%2==1 && getCell(i)==null)
 				setCell(i, doors.remove(i));
+			else
+				setCell(i,new Cell(""));
 		}
 	}
 	

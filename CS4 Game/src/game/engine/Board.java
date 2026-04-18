@@ -99,7 +99,7 @@ public class Board {
 		
 		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
 			
-			CardCell CC= new CardCell(originalCards.get(i).getName());
+			CardCell CC= new CardCell(cards.get(i).getName());
 			setCell(Constants.CARD_CELL_INDICES[i],CC);
 		}
 		while(!specialCells.isEmpty()) {

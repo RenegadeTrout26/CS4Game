@@ -97,11 +97,9 @@ public class Board {
 			setCell(Constants.MONSTER_CELL_INDICES[i],MC);
 		}
 		
-		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
-			
-			CardCell CC= new CardCell(cards.get(i).getName());
-			setCell(Constants.CARD_CELL_INDICES[i],CC);
-		}
+		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) 
+			setCell(Constants.CARD_CELL_INDICES[i],new CardCell("Card Cell"));
+		
 		while(!specialCells.isEmpty()) {
 			if(specialCells.get(0) instanceof ConveyorBelt)
 				conveyors.add((ConveyorBelt)specialCells.remove(0));
@@ -126,9 +124,9 @@ public class Board {
 		
 		for (int i = 0; i < boardCells.length; i++) {
 			if(i%2==1 && getCell(i)==null)
-				setCell(i, doors.remove(i));
+				setCell(i, doors.remove(0));
 			else
-				setCell(i,new Cell(""));
+				setCell(i,new Cell("Normal Cell"));
 		}
 	}
 	

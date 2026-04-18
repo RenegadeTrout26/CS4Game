@@ -29,7 +29,8 @@ public class Cell {
 			 return false;
 			 
 		 }
-		 public void onLand(Monster landingMonster, Monster opponentMonster){
+	 
+	public void onLand(Monster landingMonster, Monster opponentMonster){
 			
-		 }
+	}
 }

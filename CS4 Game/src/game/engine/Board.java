@@ -1,11 +1,13 @@
 package game.engine;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import game.engine.cards.Card;
+import game.engine.cards.SwapperCard;
 import game.engine.cells.*;
 import game.engine.monsters.Monster;
 import game.engine.dataloader.*;
+import game.engine.exceptions.*;
 
 import java.io.*;
 
@@ -20,6 +22,9 @@ public class Board {
 		stationedMonsters = new ArrayList<Monster>();
 		originalCards = readCards;
 		cards = new ArrayList<Card>();
+		
+		setCardsByRarity();
+		reloadCards();
 	}
 	
 	public Cell[][] getBoardCells() {
@@ -81,7 +86,7 @@ public class Board {
 	}
 	
 	
-	void initializeBoard(ArrayList<Cell> specialCells) throws IOException
+	public void initializeBoard(ArrayList<Cell> specialCells) throws IOException
 	{
 		ArrayList<Cell> typeOfCells = DataLoader.readCells();
 		ArrayList<ConveyorBelt> conveyors = new ArrayList<>();
@@ -141,8 +146,59 @@ public class Board {
 	}
 	
 	
-	static void reloadCards()
+	public static void reloadCards()
 	{
+		ArrayList<Card> x = originalCards;
+		int size = x.size();
+		Random r = new Random();
+		ArrayList<Card> result = new ArrayList<>();
+		while(result.size()<size)
+			{
+			int f = r.nextInt(size);
+			if(!result.contains(x.get(f)))
+				result.add(x.get(f));
+			
+			}
 		
+		cards = result;
+	}
+
+	
+	public static Card drawCard()
+	{
+		if(cards.isEmpty())
+			reloadCards();
+		return cards.remove(0);
+	}
+	
+	private void updateMonsterPositions(Monster Player, Monster Opponent)
+	{
+		int playerPosition = Player.getPosition();
+		Cell playerCell = getCell(playerPosition);
+		int opponentPosition =Opponent.getPosition();
+		Cell opponentCell = getCell(opponentPosition);
+		for (int i = 0; i < Constants.BOARD_ROWS; i++) {
+			for (int j = 0; j < Constants.BOARD_COLS; j++) {
+				Cell c = boardCells[i][j];
+				if(c.getMonster().equals(Player) || 
+						c.getMonster().equals(Opponent))
+					c.setMonster(null);
+			
+					
+			}
+			
+		}
+		setCell(playerPosition, playerCell);
+		setCell(opponentPosition,opponentCell);
+	}
+	
+	public void moveMonster(Monster currentMonster, int roll, Monster opponentMonster) throws InvalidMoveException{
+		int initialPosition = currentMonster.getPosition();
+		currentMonster.move(roll);
+		if(currentMonster.getPosition()==opponentMonster.getPosition())
+		{
+			currentMonster.setPosition(initialPosition);
+			
+		}
 	}
 }

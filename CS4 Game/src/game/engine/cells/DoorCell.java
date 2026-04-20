@@ -34,7 +34,7 @@ public class DoorCell extends Cell implements CanisterModifier {
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	public  void onLand(Monster landingMonster, Monster opponentMonster){

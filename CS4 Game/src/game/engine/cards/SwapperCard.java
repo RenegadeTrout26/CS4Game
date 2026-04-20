@@ -10,8 +10,11 @@ public class SwapperCard extends Card {
 
 	@Override
 	public void performAction(Monster player, Monster opponent) {
-		// TODO Auto-generated method stub
-		
+		if(player.getPosition()<opponent.getPosition()){
+			int temp=player.getPosition();
+			player.setPosition(opponent.getPosition());
+			opponent.setPosition(temp);
+		}
 	}
 	
 }

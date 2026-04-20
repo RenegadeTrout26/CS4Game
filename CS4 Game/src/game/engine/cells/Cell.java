@@ -34,4 +34,3 @@ public class Cell {
 			this.monster=landingMonster;
 	}
 }
-//hi marco

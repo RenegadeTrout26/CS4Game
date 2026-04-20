@@ -1,5 +1,6 @@
 package game.engine.cards;
 
+import game.engine.Role;
 import game.engine.monsters.Monster;
 
 public class ConfusionCard extends Card {

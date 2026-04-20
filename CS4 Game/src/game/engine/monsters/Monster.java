@@ -99,5 +99,10 @@ public abstract class Monster implements Comparable<Monster> {
 		
 	}
 	public abstract void executePowerupEffect(Monster opponentMonster);
+	
+	public void decrementConfusion()
+	{
+		
+	}
 
 }

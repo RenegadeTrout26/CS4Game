@@ -212,8 +212,8 @@ public class Board {
 				int confusion = currentMonster.getConfusionTurns();
 				if(currentMonster.isConfused() && confusion== initalConfusionState)
 				{
-					currentMonster.setConfusionTurns(confusion-1);
-					opponentMonster.setConfusionTurns(confusion-1);
+					currentMonster.decrementConfusion();
+					opponentMonster.decrementConfusion();
 				}
 			}
 		}

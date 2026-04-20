@@ -34,11 +34,13 @@ public class DoorCell extends Cell implements CanisterModifier {
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		
-		
+		monster.setEnergy(monster.getEnergy()+ canisterValue);
 	}
 	public  void onLand(Monster landingMonster, Monster opponentMonster){
 		if (activated=false){
+			if (landingMonster.getRole().equals(opponentMonster.getRole())){
+				
+			}
 			
 		}
 	}

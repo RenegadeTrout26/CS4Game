@@ -5,6 +5,7 @@ import java.util.*;
 import game.engine.cards.Card;
 import game.engine.cards.SwapperCard;
 import game.engine.cells.*;
+import game.engine.dataloader.DataLoader;
 import game.engine.monsters.Monster;
 import game.engine.exceptions.*;
 
@@ -22,7 +23,7 @@ public class Board {
 		originalCards = readCards;
 		cards = new ArrayList<Card>();
 		
-		setCardsByRarity();
+		this.setCardsByRarity();
 		reloadCards();
 	}
 	
@@ -111,21 +112,20 @@ public class Board {
 			else
 				if(specialCells.get(0) instanceof DoorCell)
 					doors.add((DoorCell)specialCells.remove(0));
-				else
-					specialCells.remove(0);
 			}
 		}
 		for (int i = 0; i < Constants.CONVEYOR_CELL_INDICES.length; i++) {
-			setCell(Constants.CONVEYOR_CELL_INDICES[i],conveyors.remove(i));
+			setCell(Constants.CONVEYOR_CELL_INDICES[i],conveyors.remove(0));
 		}
 		for (int i = 0; i < Constants.SOCK_CELL_INDICES.length; i++) {
-			setCell(Constants.SOCK_CELL_INDICES[i],contaminations.remove(i));
+			setCell(Constants.SOCK_CELL_INDICES[i],contaminations.remove(0));
 		}
 		
-		for (int i = 0; i < boardCells.length; i++) {
-			if(i%2==1 && getCell(i)==null)
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if(i%2==1 && getCell(i).getClass()==null)
 				setCell(i, doors.remove(0));
 			else
+				if(i%2==0 && getCell(i).getClass()==null)
 				setCell(i,new Cell("Normal Cell"));
 		}
 	}
@@ -147,18 +147,8 @@ public class Board {
 	public static void reloadCards()
 	{
 		ArrayList<Card> x = originalCards;
-		int size = x.size();
-		Random r = new Random();
-		ArrayList<Card> result = new ArrayList<>();
-		while(result.size()<size)
-			{
-			int f = r.nextInt(size);
-			if(!result.contains(x.get(f)))
-				result.add(x.get(f));
-			
-			}
-		
-		cards = result;
+		Collections.shuffle(x);
+		cards = x;
 	}
 
 	

@@ -34,6 +34,8 @@ public class EnergyStealCard extends Card implements CanisterModifier {
 
 					
 				}
+		}else{
+			opponent.setShielded(false);
 		}
 
 	}

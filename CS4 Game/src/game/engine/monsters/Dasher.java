@@ -19,9 +19,19 @@ public class Dasher extends Monster {
 	}
 
 	@Override
-	public void executePowerupEffect(Monster opponentMonster) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void move(int distance) {
+
+        if (momentumTurns > 0) {
+            super.move(distance * 3); // powerup active
+            momentumTurns--;
+        } else {
+            super.move(distance * 2); // passive
+        }
+    }
+
+    @Override
+    public void executePowerupEffect(Monster opponentMonster) {
+        momentumTurns = 1; // activates 3× for next move
+    }
 
 }

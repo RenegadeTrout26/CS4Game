@@ -24,16 +24,14 @@ public class MultiTasker extends Monster {
 		setNormalSpeedTurns(2);
 		
 	}
-	 public void move(int distance) {
-	        if (normalSpeedTurns > 0) {
-	            super.move(distance); // normal speed
-	        } else {
-	            super.move(distance / 2); // passive slow movement
-	        }
-	    }
-	  public void alterEnergy(int energy) {
-	        super.alterEnergy(energy + 200);
-	    }
-	
+	public void move(int distance) {
+
+		if (normalSpeedTurns > 0) {
+			normalSpeedTurns--;   
+			super.move(distance); 
+		} else {
+			super.move(distance / 2); 
+		}
+	}
 
 }

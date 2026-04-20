@@ -16,8 +16,15 @@ public class ConfusionCard extends Card {
 
 	@Override
 	public void performAction(Monster player, Monster opponent) {
-		// TODO Auto-generated method stub
-		
+		player.setConfusionTurns(getDuration());
+		opponent.setConfusionTurns(getDuration());
+		if (player.getRole()==Role.LAUGHER){
+			player.setRole(Role.SCARER);
+			opponent.setRole(Role.LAUGHER);
+		}else{
+			opponent.setRole(Role.SCARER);
+			player.setRole(Role.LAUGHER);
+		}
 	}
 
 }

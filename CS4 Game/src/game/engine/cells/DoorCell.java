@@ -40,13 +40,16 @@ public class DoorCell extends Cell implements CanisterModifier {
 	}
 	public  void onLand(Monster landingMonster, Monster opponentMonster){
 		if (activated==false){ 
-			ArrayList<Monster> monsters = Board.getStationedMonsters();
+			ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
 			if(landingMonster.getRole().equals(getRole()))
 			{
 			
-			for(int i=0; i<monsters.size();i++){
-			if (landingMonster.getRole().equals(monsters.get(i).getRole())){
-				modifyCanisterEnergy(monsters.get(i),energy);
+			for(int i=0; i<stationedMonsters.size();i++){
+			if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
+				modifyCanisterEnergy(stationedMonsters.get(i),energy);
+			}
+			if (!landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
+				setActivated(true);
 			}
 			}
 			modifyCanisterEnergy(landingMonster,energy);
@@ -55,17 +58,20 @@ public class DoorCell extends Cell implements CanisterModifier {
 				
 				if(!landingMonster.isShielded()){
 				
-				for(int i=0; i<monsters.size();i++){
-				if (landingMonster.getRole().equals(monsters.get(i).getRole())){
-					modifyCanisterEnergy(monsters.get(i),0-energy);
+				for(int i=0; i<stationedMonsters.size();i++){
+				if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
+					modifyCanisterEnergy(stationedMonsters.get(i),0-energy);
 					
 					   }  
 					}
-				}
 				modifyCanisterEnergy(landingMonster,energy);
+				}
+				
+				if (landingMonster.isShielded()){
+					setActivated(true);
+					landingMonster.setShielded(false);
 			}
-		if (landingMonster.isShielded()){
-			setActivated(true);
+	
 		}
 		}
 	}

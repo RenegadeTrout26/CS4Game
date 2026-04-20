@@ -26,6 +26,9 @@ public class MonsterCell extends Cell {
 				 if (!landingMonster.isShielded()){
 					 landingMonster.setEnergy(temp);
 				 }
+				 if (landingMonster.isShielded()){
+					 landingMonster.setShielded(false);
+				 }
 			 }
 		 }
 	 }

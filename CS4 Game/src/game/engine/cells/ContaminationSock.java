@@ -12,7 +12,7 @@ public class ContaminationSock extends TransportCell implements CanisterModifier
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		monster.setEnergy(monster.getEnergy()- canisterValue);
+		monster.alterEnergy(canisterValue);
 		
 		
 	}

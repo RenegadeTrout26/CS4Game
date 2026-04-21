@@ -122,7 +122,7 @@ public abstract class Monster implements Comparable<Monster> {
 	        shielded = false;
 	        return;
 	    }
-	    setEnergy(this.energy + energy);
+	    else  setEnergy(this.energy + energy);
 	}
 		
 	}

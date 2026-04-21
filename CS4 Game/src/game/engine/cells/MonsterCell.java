@@ -22,11 +22,17 @@ public class MonsterCell extends Cell {
 		 else {
 			 if (landingMonster.getEnergy()> cellMonster.getEnergy()){
 				 //cell monster fe temp, hasnwadi landig fe cell, law shielded nthng, law la2 hghana5od temp fe lanf=ding
-				int temp = cellMonster.getEnergy();
-					 landingMonster.alterEnergy(temp);
-					 cellMonster.alterEnergy(landingMonster.getEnergy());
-
+				if (!landingMonster.isShielded()){
+					
 				
+					int temp = cellMonster.getEnergy();
+					 landingMonster.setEnergy(temp);
+					 cellMonster.setEnergy(landingMonster.getEnergy());
+
+				}
+				else{
+					landingMonster.setShielded(false);
+				}
 			 }
 		 }
 	 }

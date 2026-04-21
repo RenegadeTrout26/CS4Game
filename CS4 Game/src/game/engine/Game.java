@@ -25,10 +25,11 @@ public class Game {
 		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
 		this.current = player;
 		
+		
 		allMonsters.remove(player);
 		allMonsters.remove(opponent);
 		Board.setStationedMonsters(allMonsters);
-		board.initializeBoard(DataLoader.readCells());
+		//board.initializeBoard(DataLoader.readCells());
 	}
 	
 	public Board getBoard() {

@@ -178,11 +178,8 @@ public void initializeBoard(ArrayList<Cell> specialCells) throws IOException{
 			}
 			else
 				if(c instanceof DoorCell)
-					doors.add((DoorCell)c);
-			
-			
-		
-	}
+					doors.add((DoorCell)c);	
+		}
 	
 		while(!monsters.isEmpty())
 		{
@@ -200,13 +197,14 @@ public void initializeBoard(ArrayList<Cell> specialCells) throws IOException{
 			else
 				{setCell(i, doors.remove(0));}
 		
-			}}
+			}
+		}
 
 }
 
 public static void main(String[] args) throws IOException {
 	Board b = new Board(DataLoader.readCards());
-	b.setStationedMonsters(DataLoader.readMonsters());
+	setStationedMonsters(DataLoader.readMonsters());
 	b.initializeBoard(DataLoader.readCells());
 	Cell c = new Cell("mohsen");
 	b.setCell(30, c);

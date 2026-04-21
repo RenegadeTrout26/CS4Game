@@ -36,44 +36,40 @@ public class DoorCell extends Cell implements CanisterModifier {
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		monster.setEnergy(monster.getEnergy()+ canisterValue);
+		monster.alterEnergy(canisterValue);
 	}
 	public  void onLand(Monster landingMonster, Monster opponentMonster){
-		super.onLand(landingMonster,opponentMonster);
-		if (activated==false){ 
+		super.onLand(landingMonster,opponentMonster); // monster = landing monster
+		if (activated==false){  // not activated -> ne activate if not shielded and added energy
+			int temp = landingMonster.getEnergy(); // monster energy dirnk
 			ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
 			if(landingMonster.getRole().equals(getRole()))
-			{
-			
-			for(int i=0; i<stationedMonsters.size();i++){
-			if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
-				modifyCanisterEnergy(stationedMonsters.get(i),energy);
-			}
-			if (!landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
-				setActivated(true);
-			}
-			}
-			modifyCanisterEnergy(landingMonster,energy);
-			}
-			else{
-				
-				if(!landingMonster.isShielded()){
+				{
 				
 				for(int i=0; i<stationedMonsters.size();i++){
 				if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
-					modifyCanisterEnergy(stationedMonsters.get(i),0-energy);
+					modifyCanisterEnergy(stationedMonsters.get(i),energy);
+				}
+				}
+				modifyCanisterEnergy(landingMonster,energy);
+				
+					setActivated(true);
+				
+			}
+			else{
+				
+				for(int i=0; i<stationedMonsters.size();i++){
+				if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
+					modifyCanisterEnergy(stationedMonsters.get(i),-energy);
 					
 					   }  
 					}
-				modifyCanisterEnergy(landingMonster,energy);
-				}
-				
-				if (landingMonster.isShielded()){
+				modifyCanisterEnergy(landingMonster,-energy);
+				if((landingMonster.getEnergy()!=(temp))){
 					setActivated(true);
-					landingMonster.setShielded(false);
 			}
-	
+			}
 		}
-		}
+		
 	}
 }

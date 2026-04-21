@@ -123,12 +123,6 @@ public abstract class Monster implements Comparable<Monster> {
 	        return;
 	    }
 	     setEnergy(this.energy + energy); 
-
-		
-		
-		
-		
-		
 		
 		
 	}

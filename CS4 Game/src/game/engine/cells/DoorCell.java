@@ -39,6 +39,7 @@ public class DoorCell extends Cell implements CanisterModifier {
 		monster.setEnergy(monster.getEnergy()+ canisterValue);
 	}
 	public  void onLand(Monster landingMonster, Monster opponentMonster){
+		
 		if (activated==false){ 
 			ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
 			if(landingMonster.getRole().equals(getRole()))

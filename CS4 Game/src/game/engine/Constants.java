@@ -18,7 +18,7 @@ public final class Constants {
        ============ 2. SPECIAL CELL POSITIONS ==============
        ===================================================== */
 
-    public static final int[] MONSTER_CELL_INDICES = {2, 8, 36, 54 , 82, 88};
+    public static final int[] MONSTER_CELL_INDICES = {2, 8, 36, 54, 82, 88};
 
     public static final int[] CONVEYOR_CELL_INDICES = {6, 22, 44, 52, 66};
 

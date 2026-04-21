@@ -29,7 +29,7 @@ public class Game {
 		allMonsters.remove(player);
 		allMonsters.remove(opponent);
 		Board.setStationedMonsters(allMonsters);
-		//board.initializeBoard(DataLoader.readCells());
+	//	board.initializeBoard(DataLoader.readCells());
 	}
 	
 	public Board getBoard() {

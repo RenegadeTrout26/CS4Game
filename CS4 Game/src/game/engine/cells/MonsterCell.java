@@ -18,19 +18,22 @@ public class MonsterCell extends Cell {
 		super.onLand(landingMonster,opponentMonster);	 
 	 if(cellMonster.getRole().equals(landingMonster.getRole())){
 			 landingMonster.executePowerupEffect(opponentMonster);
-		 }
-		 else {
+		 
 			 if (landingMonster.getEnergy()> cellMonster.getEnergy()){
 				 //cell monster fe temp, hasnwadi landig fe cell, law shielded nthng, law la2 hghana5od temp fe lanf=ding
-				int temp = cellMonster.getEnergy();
-				 if (!landingMonster.isShielded()){
-					 landingMonster.setEnergy(temp);
+					int temp = cellMonster.getEnergy();
 					 cellMonster.setEnergy(landingMonster.getEnergy());
 
-				 }
-				 if (landingMonster.isShielded()){
-					 landingMonster.setShielded(false);
-				 }
+				
+				 if (!landingMonster.isShielded()){
+				
+					landingMonster.setEnergy(temp);
+					
+
+				}
+				else{
+					landingMonster.setShielded(false);
+				}
 			 }
 		 }
 	 }

@@ -96,7 +96,10 @@ public abstract class Monster implements Comparable<Monster> {
 	}
 	public void move(int distance)
 	{
-		position+=distance;
+		if(position+distance<99)
+			position+=distance;
+		else
+			position = (position+distance)%Constants.BOARD_SIZE;
 		
 	}
 	public abstract void executePowerupEffect(Monster opponentMonster);

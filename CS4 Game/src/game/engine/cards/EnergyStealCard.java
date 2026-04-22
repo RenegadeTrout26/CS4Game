@@ -6,7 +6,7 @@ import game.engine.monsters.Dynamo;
 import game.engine.monsters.Monster;
 
 public class EnergyStealCard extends Card implements CanisterModifier {
-	private int energy;
+	private final int energy;
 
 	public EnergyStealCard(String name, String description, int rarity, int energy) {
 		super(name, description, rarity, true);
@@ -25,35 +25,28 @@ public class EnergyStealCard extends Card implements CanisterModifier {
 
 	@Override
 	public void performAction(Monster player, Monster opponent) {
-	if(!(opponent.isShielded())){
-				if(energy<opponent.getEnergy()){
-					modifyCanisterEnergy(opponent,-energy);
-				    modifyCanisterEnergy(player,energy);
-				
-				}
-				else{
-					int c =opponent.getEnergy();
-					modifyCanisterEnergy(opponent,-opponent.getEnergy());
-				modifyCanisterEnergy(player,c);
-				}
-	}
-	else{
-		opponent.setShielded(false);
+	int amounToSteal = Math.min(this.energy, opponent.getEnergy());
+	
+	if (opponent.isShielded()){
+		modifyCanisterEnergy(opponent, -amounToSteal);
+	}else{
+		modifyCanisterEnergy(opponent, -amounToSteal);
+		modifyCanisterEnergy(player, amounToSteal);
 	}
 
 	}
 	
-/*
-public static void main(String[] args ){
-	Monster x = new Dynamo("hamada"," idk", Role.LAUGHER, 20);
-	Monster y = new Dynamo("hamada2"," idk", Role.SCARER, 50);
-	y.setShielded(true);
-	EnergyStealCard e = new EnergyStealCard("card"," description", 5, 45);
-	e.performAction(x, y);
-	System.out.println(y.getEnergy());
-	System.out.println(x.getEnergy());
-	System.out.println(y.isShielded());
-}	*/
+
+//public static void main(String[] args ){
+//	Monster x = new Dynamo("hamada"," idk", Role.LAUGHER, 20);
+//	Monster y = new Dynamo("hamada2"," idk", Role.SCARER, 50);
+//	y.setShielded(false);
+//	EnergyStealCard e = new EnergyStealCard("card"," description", 5, 45);
+//	e.performAction(x, y);
+//	System.out.println(y.getEnergy());
+//	System.out.println(x.getEnergy());
+//	System.out.println(y.isShielded());
+//}	
 	
 	
 }

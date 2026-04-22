@@ -29,7 +29,7 @@ public class Game {
 		allMonsters.remove(player);
 		allMonsters.remove(opponent);
 		Board.setStationedMonsters(allMonsters);
-	//	board.initializeBoard(DataLoader.readCells());
+		board.initializeBoard(DataLoader.readCells());
 	}
 	
 	public Board getBoard() {
@@ -79,8 +79,10 @@ public class Game {
 	{
 		if(current.getEnergy()<Constants.POWERUP_COST)
 			throw new OutOfEnergyException();
-		else
+		else{
+			current.setEnergy(current.getEnergy()-Constants.POWERUP_COST);
 			current.executePowerupEffect(getCurrentOpponent());
+		}
 	}
 	
 	public void playTurn() throws InvalidMoveException

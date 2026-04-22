@@ -1,6 +1,5 @@
 package game.engine.cells;
 
-import game.engine.Game;
 import game.engine.monsters.*;
 
 public class MonsterCell extends Cell {
@@ -17,28 +16,18 @@ public class MonsterCell extends Cell {
 
  public void onLand(Monster landingMonster, Monster opponentMonster){
 		super.onLand(landingMonster,opponentMonster);	 
-	 if(cellMonster.getRole().equals(landingMonster.getRole())){
-			 landingMonster.executePowerupEffect(opponentMonster);
-		 }
-		 else {
-			 landingMonster.executePowerupEffect(opponentMonster);
-
-			 if (landingMonster.getEnergy()> cellMonster.getEnergy()){
-				 //cell monster fe temp, hasnwadi landig fe cell, law shielded nthng, law la2 hghana5od temp fe lanf=ding
-					int temp = cellMonster.getEnergy();
-					 cellMonster.setEnergy(landingMonster.getEnergy());
-
+		
+		
+		if (cellMonster.getRole().equals(landingMonster.getRole())) {
+			landingMonster.executePowerupEffect(opponentMonster);
+		}
+		
+			 int cellMonsterEnergy = cellMonster.getEnergy();
+				int landingMonsterEnergy = landingMonster.getEnergy();
 				
-				 if (!landingMonster.isShielded()){
-				
-					landingMonster.setEnergy(temp);
-					
-
-				}
-				else{
-					landingMonster.setShielded(false);
-				}
-			 }
+				if (landingMonsterEnergy > cellMonsterEnergy) {	
+					cellMonster.alterEnergy(landingMonsterEnergy - cellMonsterEnergy);
+					landingMonster.alterEnergy(cellMonsterEnergy - landingMonsterEnergy);
 		 }
 	 }
 }

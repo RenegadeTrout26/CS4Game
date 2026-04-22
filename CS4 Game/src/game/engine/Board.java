@@ -125,7 +125,9 @@ public class Board {
 		}
 		
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
-			if(!ArrayContains(Constants.CARD_CELL_INDICES,i) && !ArrayContains(Constants.CONVEYOR_CELL_INDICES,i) && !ArrayContains(Constants.MONSTER_CELL_INDICES, i) && !ArrayContains(Constants.SOCK_CELL_INDICES, i) && getCell(i)== null)
+			if(!ArrayContains(Constants.CARD_CELL_INDICES,i) && !ArrayContains(Constants.CONVEYOR_CELL_INDICES,i) &&
+					!ArrayContains(Constants.MONSTER_CELL_INDICES, i) && !ArrayContains(Constants.SOCK_CELL_INDICES, i) && 
+					getCell(i)== null)
 			{
 				if(i%2==1 && !doors.isEmpty())
 				{
@@ -145,80 +147,6 @@ private static boolean ArrayContains(int[] arr, int index)
 	}
 	return false;
 }
-//public void initializeBoard(ArrayList<Cell> specialCells) throws IOException{
-//	
-//		
-//		ArrayList<Integer> conveyors = new ArrayList<>();
-//		ArrayList<Integer> socks = new ArrayList<>();
-//		ArrayList<Integer> monsters = new ArrayList<>();
-//		ArrayList<Integer> cards = new ArrayList<>();
-//		ArrayList<DoorCell> doors = new ArrayList<>();
-//		
-//		
-//		
-//		for (int j = 0; j < Constants.CONVEYOR_CELL_INDICES.length; j++) {
-//			conveyors.add(Constants.CONVEYOR_CELL_INDICES[j]);
-//		}
-//		for (int j = 0; j < Constants.SOCK_CELL_INDICES.length; j++) {
-//			socks.add(Constants.SOCK_CELL_INDICES[j]);
-//		}
-//		for (int j = 0; j < Constants.MONSTER_CELL_INDICES.length; j++) {
-//			monsters.add(Constants.MONSTER_CELL_INDICES[j]);
-//		}
-//		for (int j = 0; j < Constants.CARD_CELL_INDICES.length; j++) {
-//			cards.add(Constants.CARD_CELL_INDICES[j]);
-//		}
-//		
-//		
-//		
-//		while(!specialCells.isEmpty()) {
-//			
-//			Cell c =specialCells.remove(0); 
-//			if(c instanceof ConveyorBelt)
-//			{
-//				setCell(conveyors.remove(0),c);
-//				
-//			}
-//			else if(c instanceof ContaminationSock)
-//			{
-//			
-//				setCell(socks.remove(0),c);
-//			}
-//			else
-//				if(c instanceof DoorCell)
-//					doors.add((DoorCell)c);	
-//		}
-//	
-//		while(!monsters.isEmpty())
-//		{
-//			setCell(monsters.remove(0), new MonsterCell(stationedMonsters.get(0).getName(), stationedMonsters.remove(0)));
-//		}
-//		while(!cards.isEmpty())
-//		{
-//			setCell(cards.remove(0), new CardCell("Card Cell"));
-//		}
-//		
-//		for (int i = 0; i <Constants.BOARD_SIZE; i++) {
-//			if(!cards.contains(i) && !conveyors.contains(i) && !socks.contains(i) && !monsters.contains(i) && getCell(i)== null)
-//			{if(i%2==0)
-//				{setCell(i, new Cell("Normal Cell")); }
-//			else
-//				{setCell(i, doors.remove(0));}
-//		
-//			}
-//		}
-//
-//}
-
-public static void main(String[] args) throws IOException {
-	Board b = new Board(DataLoader.readCards());
-	setStationedMonsters(DataLoader.readMonsters());
-	b.initializeBoard(DataLoader.readCells());
-	Cell c = new Cell("mohsen");
-	b.setCell(30, c);
-	
-}
-
 
 	
 	private void setCardsByRarity()
@@ -254,20 +182,16 @@ public static void main(String[] args) throws IOException {
 	{
 		int playerPosition = Player.getPosition();
 		Cell playerCell = getCell(playerPosition);
-		int opponentPosition =Opponent.getPosition();
+		int opponentPosition = Opponent.getPosition();
 		Cell opponentCell = getCell(opponentPosition);
-		for (int i = 0; i < Constants.BOARD_ROWS; i++) {
-			for (int j = 0; j < Constants.BOARD_COLS; j++) {
-				Cell c = boardCells[i][j];
-
-					c.setMonster(null);
-			
-					
-			}
-			
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			Cell c = getCell(i);
+			c.setMonster(null);
 		}
-		setCell(playerPosition, playerCell);
-		setCell(opponentPosition,opponentCell);
+		playerCell.setMonster(Player);
+		opponentCell.setMonster(Opponent);
+		
+		
 	}
 	
 	public void moveMonster(Monster currentMonster, int roll, Monster opponentMonster) throws InvalidMoveException{

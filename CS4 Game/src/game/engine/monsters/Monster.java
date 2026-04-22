@@ -117,15 +117,34 @@ public abstract class Monster implements Comparable<Monster> {
 			
 			
 		
+	//public final  void alterEnergy(int energy){
+	  // if (shielded && energy < 0) {
+	    //    shielded = false;
+	      //  return;
+	    //}
+	     //setEnergy(this.energy + energy); 
+		
+		
+	//}
 	public final  void alterEnergy(int energy){
-	   if (shielded && energy < 0) {
-	        shielded = false;
-	        return;
-	    }
-	     setEnergy(this.energy + energy); 
-		
-		
-	}
-		
-	}
+		   if (shielded && energy < 0) {
+		        shielded = false;
+		        return;
+		    }
+		   
+		   int newEnergy = energy;
+		   if (energy != 0) {
+			   if (this instanceof Dynamo) {
+				   newEnergy = newEnergy * 2;
+			   } else if (this instanceof MultiTasker) {
+				   newEnergy = newEnergy + Constants.MULTITASKER_BONUS;
+			   } else if (this instanceof Schemer) {
+				   newEnergy = newEnergy + Constants.SCHEMER_STEAL;
+			   }
+		   }
+		   
+		   setEnergy(this.energy + newEnergy); 
+		}
+			
+}
 

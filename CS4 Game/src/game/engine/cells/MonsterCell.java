@@ -1,5 +1,6 @@
 package game.engine.cells;
 
+import game.engine.Game;
 import game.engine.monsters.*;
 
 public class MonsterCell extends Cell {
@@ -20,6 +21,8 @@ public class MonsterCell extends Cell {
 			 landingMonster.executePowerupEffect(opponentMonster);
 		 }
 		 else {
+			 landingMonster.executePowerupEffect(opponentMonster);
+
 			 if (landingMonster.getEnergy()> cellMonster.getEnergy()){
 				 //cell monster fe temp, hasnwadi landig fe cell, law shielded nthng, law la2 hghana5od temp fe lanf=ding
 					int temp = cellMonster.getEnergy();

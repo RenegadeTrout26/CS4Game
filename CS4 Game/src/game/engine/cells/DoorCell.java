@@ -36,40 +36,43 @@ public class DoorCell extends Cell implements CanisterModifier {
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		monster.alterEnergy(canisterValue);
+		if (monster.getRole().equals(role)) {
+		
+			monster.alterEnergy(canisterValue);
+		}
+		
+		else{
+		
+			monster.alterEnergy(-canisterValue);
+		}
 	}
+	
+	
+	
 	public  void onLand(Monster landingMonster, Monster opponentMonster){
 		super.onLand(landingMonster,opponentMonster); // monster = landing monster
-		if (activated==false){  // not activated -> ne activate if not shielded and added energy
-			int temp = landingMonster.getEnergy(); // monster energy dirnk
+		
+		if (!activated){  // not activated -> ne activate if not shielded and added energy
+			
 			ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
-			if(landingMonster.getRole().equals(getRole()))
+			if(!landingMonster.getRole().equals(getRole()))
 				{
-				
 				for(int i=0; i<stationedMonsters.size();i++){
+					if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
+						modifyCanisterEnergy(stationedMonsters.get(i),-energy);
+					}
+				modifyCanisterEnergy(landingMonster,-energy);
+			
+			}
+			modifyCanisterEnergy(landingMonster, energy);
+			
+			for(int i=0; i<stationedMonsters.size();i++){
 				if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
 					modifyCanisterEnergy(stationedMonsters.get(i),energy);
 				}
-				}
-				modifyCanisterEnergy(landingMonster,energy);
-				
-					setActivated(true);
-				
 			}
-			else{
-				
-				for(int i=0; i<stationedMonsters.size();i++){
-				if (landingMonster.getRole().equals(stationedMonsters.get(i).getRole())){
-					modifyCanisterEnergy(stationedMonsters.get(i),-energy);
-					
-					   }  
-					}
-				modifyCanisterEnergy(landingMonster,-energy);
-				if((landingMonster.getEnergy()!=(temp))){
-					setActivated(true);
-			}
-			}
+			setActivated(true);
 		}
-		
 	}
+  }
 }

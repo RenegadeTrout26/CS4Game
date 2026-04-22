@@ -94,7 +94,7 @@ public class Board {
 		ArrayList<ContaminationSock> contaminations = new ArrayList<>();
 		ArrayList<DoorCell> doors = new ArrayList<>();
 		
-		for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length && !stationedMonsters.isEmpty(); i++) {
+		for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length && i<stationedMonsters.size(); i++) {
 			
 			MonsterCell MC= new MonsterCell(stationedMonsters.get(i).getName(), stationedMonsters.get(i));
 			setCell(Constants.MONSTER_CELL_INDICES[i],MC);

@@ -14,15 +14,14 @@ public class Schemer extends Monster {
 
 	    int totalStolen = 0;
 
-	    // steal from opponent
 	    totalStolen += stealEnergyFrom(opponentMonster);
 
-	    // steal from stationed monsters
+	    
 	    for (Monster m : Board.getStationedMonsters()) {
 	        totalStolen += stealEnergyFrom(m);
 	    }
 
-	    // apply energy gain once (+10 passive)
+	   
 	    setEnergy(getEnergy() + totalStolen + 10);
 	}
 	private int stealEnergyFrom(Monster target) {
@@ -30,10 +29,10 @@ public class Schemer extends Monster {
 	    int amount =
 	        Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
 
-	    // apply energy loss
+	    
 	    target.alterEnergy(-amount);
 
-	    // apply Schemer passive if target is Schemer
+	   
 	    if (target instanceof Schemer) {
 	        target.setEnergy(target.getEnergy() + 10);
 	    }

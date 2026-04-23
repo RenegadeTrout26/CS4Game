@@ -10,30 +10,34 @@ public class Schemer extends Monster {
 		super(name, description, role, energy);
 	}
 
-	@Override
 	public void executePowerupEffect(Monster opponentMonster) {
+
 	    int totalStolen = 0;
 
-	    // 1. REMOVE the separate steal from opponentMonster on line 19.
-	    
-	    // 2. The Loop
+	    // steal from opponent
+	    totalStolen += stealEnergyFrom(opponentMonster);
+
+	    // steal from stationed monsters
 	    for (Monster m : Board.getStationedMonsters()) {
-	      
-	        if (m != this) {
-	            totalStolen += stealEnergyFrom(m);
-	        }
-	    }totalStolen+=10;
+	        totalStolen += stealEnergyFrom(m);
+	    }
 
-	    // 3. Final update
-	    this.setEnergy(this.getEnergy() + totalStolen + 10);
+	    // apply energy gain once (+10 passive)
+	    setEnergy(getEnergy() + totalStolen + 10);
 	}
-
 	private int stealEnergyFrom(Monster target) {
-		int amount = Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
 
-		// reduce opponent energy
-		target.alterEnergy(amount);
+	    int amount =
+	        Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
 
-		return amount;
+	    // apply energy loss
+	    target.alterEnergy(-amount);
+
+	    // apply Schemer passive if target is Schemer
+	    if (target instanceof Schemer) {
+	        target.setEnergy(target.getEnergy() + 10);
+	    }
+
+	    return amount;
 	}
 }

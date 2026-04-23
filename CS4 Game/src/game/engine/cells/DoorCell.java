@@ -52,17 +52,16 @@ public class DoorCell extends Cell implements CanisterModifier {
 		}
 
 		ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
-		landingMonster.getRole().equals(getRole());
-
+		
 		if (!landingMonster.getRole().equals(getRole()) && landingMonster.isShielded()) {
 			landingMonster.alterEnergy(-energy);
 			return;
 		}
 
 		modifyCanisterEnergy(landingMonster, energy);
-		for (Monster stationedMonster : stationedMonsters) {
-			if (stationedMonster.getRole().equals(landingMonster.getRole())) {
-				modifyCanisterEnergy(stationedMonster, energy);
+		for (int i=0; i<stationedMonsters.size();i++) {
+			if (stationedMonsters.get(i).getRole().equals(landingMonster.getRole())) {
+				modifyCanisterEnergy(stationedMonsters.get(i), energy);
 			}
 		}
 

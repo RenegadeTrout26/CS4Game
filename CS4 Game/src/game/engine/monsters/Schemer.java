@@ -1,5 +1,6 @@
 package game.engine.monsters;
 
+import game.engine.Board;
 import game.engine.Constants;
 import game.engine.Role;
 
@@ -9,22 +10,33 @@ public class Schemer extends Monster {
 		super(name, description, role, energy);
 	}
 
-	@Override
 	public void executePowerupEffect(Monster opponentMonster) {
-	    int stolen = stealEnergyFrom(opponentMonster);
+
+	    int totalStolen = 0;
+
+	    totalStolen += stealEnergyFrom(opponentMonster);
+
 	    
-	    // Instead of two separate calls, add them together 
-	    // and use the setter to force the increase.
-	    int totalIncrease = stolen + 10;
-	    setEnergy(getEnergy() + totalIncrease);
+	    for (Monster m : Board.getStationedMonsters()) {
+	        totalStolen += stealEnergyFrom(m);
+	    }
+
+	   
+	    setEnergy(getEnergy() + totalStolen + 10);
 	}
-
 	private int stealEnergyFrom(Monster target) {
-		int amount = Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
 
-		// reduce opponent energy
-		target.alterEnergy(-amount);
+	    int amount =
+	        Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
 
-		return amount;
+	    
+	    target.alterEnergy(-amount);
+
+	   
+	    if (target instanceof Schemer) {
+	        target.setEnergy(target.getEnergy() + 10);
+	    }
+
+	    return amount;
 	}
 }

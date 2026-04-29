@@ -16,9 +16,8 @@ public class Schemer extends Monster {
 
 	    totalStolen += stealEnergyFrom(opponentMonster);
 
-	    
-	    for (Monster m : Board.getStationedMonsters()) {
-	        totalStolen += stealEnergyFrom(m);
+	    for (int i = 0; i < Board.getStationedMonsters().size(); i++) {
+	        totalStolen += stealEnergyFrom(Board.getStationedMonsters().get(i));
 	    }
 
 	   

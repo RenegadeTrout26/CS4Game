@@ -27,14 +27,19 @@ public class Schemer extends Monster {
 
 	    int amount =
 	        Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
-
-	    
-	    target.alterEnergy(-amount);
-
 	   
 	    if (target instanceof Schemer) {
-	        target.setEnergy(target.getEnergy() + 10);
+	        target.setEnergy(target.getEnergy()-amount + 10);
 	    }
+	    else   if (target instanceof Dynamo) {
+	        target.setEnergy(target.getEnergy()-(2*amount));
+	    }
+	    else   if (target instanceof MultiTasker) {
+	        target.setEnergy(target.getEnergy()-amount + 200);
+	    }
+	    else 
+	        target.setEnergy(target.getEnergy()-amount);
+	    
 
 	    return amount;
 	}

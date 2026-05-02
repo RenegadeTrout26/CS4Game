@@ -87,67 +87,38 @@ public abstract class Monster implements Comparable<Monster> {
 		this.confusionTurns = confusionTurns;
 	}
 
+	public abstract void executePowerupEffect(Monster opponentMonster);
+	
+	public boolean isConfused() {
+		return confusionTurns > 0;
+	}
+	
+	public void move(int distance) {
+		this.setPosition(this.getPosition() + distance);
+	}
+	
+	public final void alterEnergy(int energy) {
+		if (shielded && energy < 0) {
+			System.out.println(name + "'s shield blocked " + (-energy) + " damage!");
+			shielded = false; // Shield breaks after one use
+		}
+		
+		else 
+			this.setEnergy(this.getEnergy() + energy);	
+	}
+	
+	public void decrementConfusion() {
+		if (isConfused()) {
+			this.setConfusionTurns(this.getConfusionTurns() - 1);
+			
+			if(!isConfused())
+				this.setRole(originalRole);
+		}
+	}
+
 	@Override
 	public int compareTo(Monster other) {
 		return this.position - other.position;
 	}
-	public boolean isConfused(){
-		return (confusionTurns==0)?false:true;
-	}
-	public void move(int distance)
-	{
-		if(position+distance<99)
-			position+=distance;
-		else
-			position = (position+distance)%Constants.BOARD_SIZE;
-		
-	}
-	public abstract void executePowerupEffect(Monster opponentMonster);
-	
-	public void decrementConfusion()
-	{
-		if (confusionTurns>0){
-			confusionTurns--;
-			if (confusionTurns == 0) {
-	            role = originalRole;
-	        }
-			
-		}
-		
-		
-	}
-	
-			
-			
-		
-	//public final  void alterEnergy(int energy){
-	  // if (shielded && energy < 0) {
-	    //    shielded = false;
-	      //  return;
-	    //}
-	     //setEnergy(this.energy + energy); 
-		
-		
-	//}
-	public final  void alterEnergy(int energy){
-		   if (shielded && energy < 0) {
-		        shielded = false;
-		        return;
-		    }
-		   
-		   int newEnergy = energy;
-		   if (energy != 0) {
-			   if (this instanceof Dynamo) {
-				   newEnergy = newEnergy * 2;
-			   } else if (this instanceof MultiTasker) {
-				   newEnergy = newEnergy + Constants.MULTITASKER_BONUS;
-			   } else if (this instanceof Schemer) {
-				   newEnergy = newEnergy + Constants.SCHEMER_STEAL;
-			   }
-		   }
-		   
-		   setEnergy(this.energy + newEnergy); 
-		}
-			
-}
 
+}

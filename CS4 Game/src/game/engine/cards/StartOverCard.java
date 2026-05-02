@@ -1,5 +1,6 @@
 package game.engine.cards;
 
+import game.engine.Constants;
 import game.engine.monsters.Monster;
 
 public class StartOverCard extends Card {
@@ -10,10 +11,7 @@ public class StartOverCard extends Card {
 
 	@Override
 	public void performAction(Monster player, Monster opponent) {
-		if (this.isLucky()){
-			opponent.setPosition(0);
-		}
-		else player.setPosition(0);
+		(this.isLucky() ? opponent : player).setPosition(Constants.STARTING_POSITION);
 	}
 
 }

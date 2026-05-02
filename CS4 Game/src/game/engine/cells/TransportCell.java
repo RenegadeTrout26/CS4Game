@@ -9,17 +9,18 @@ public abstract class TransportCell extends Cell {
 		super(name);
 		this.effect = effect;
 	}
-
+	
 	public int getEffect() {
 		return effect;
 	}
-	public void transport(Monster monster){
-		monster.setPosition(monster.getPosition()+effect);
-	}
-	public  void onLand(Monster landingMonster, Monster opponentMonster){
-		super.onLand(landingMonster,opponentMonster);
+
+	public void transport(Monster monster) {
+			monster.setPosition(monster.getPosition() + getEffect());
+    }
+
+	@Override
+	public void onLand(Monster landingMonster, Monster opponentMonster) {
+		super.onLand(landingMonster, opponentMonster);
 		transport(landingMonster);
 	}
 }
-
-

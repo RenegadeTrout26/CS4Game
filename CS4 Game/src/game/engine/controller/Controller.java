@@ -23,14 +23,10 @@ public class Controller {
 	@FXML
 	private Game game;
 	private SceneController sc = new SceneController();
-	@FXML
 	public TextArea playerTxt = new TextArea("");
-	@FXML
 	private ProgressBar playerEnergy;
-	@FXML
 	private TextArea oppTxt = new TextArea("");
-	@FXML
-	private GridPane boardGrid;
+	private GridPane boardGrid=new GridPane();
 	private StackPane[] cells;
 	
 	
@@ -53,8 +49,9 @@ public class Controller {
 	    row = (Constants.BOARD_ROWS - 1) - row; 
 	    return new int[]{row, col};
 	}
+	
 	private StackPane createCell(int i) {
-		Rectangle r = new Rectangle(60, 60, Color.WHITE);
+		Rectangle r = new Rectangle(60, 60, Color.RED);
 		Label l = new Label(i+ " ");
 		StackPane sp = new StackPane();
 		sp.getChildren().addAll(r,l);

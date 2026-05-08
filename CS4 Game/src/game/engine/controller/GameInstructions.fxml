@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.SceneController">
+   <children>
+      <Label layoutX="216.0" layoutY="34.0" text="Game Instructions">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="63.0" layoutY="135.0" prefHeight="297.0" prefWidth="586.0" text="Welcome to DoorDash! This is a snakes and Ladders varient where you play with Monsters Inc. characcters.&#10;How To Play: 1- You will choose your role: Laugher/ Scarer&#10;2- Each turn, player could choose to use PowerUp if they have enough energy, or roll Dice&#10;3- Each Cell has a different effect on player (DoorCells give or take energy, transportCells change positions... etc)&#10;4- Your goal is to reach Cell number 99 with 1000+ energy , if you don't have enough energy you loop back from Cell 0" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <Button layoutX="303.0" layoutY="466.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="Done" />
+   </children>
+</AnchorPane>

@@ -90,7 +90,7 @@ public class Controller {
 		}
 	catch(Exception e){
 		e.printStackTrace();
-		game.playTurn();}
+		}
 	}
 	public void usePowerUpUI(ActionEvent l) throws OutOfEnergyException
 	{
@@ -107,7 +107,7 @@ public class Controller {
 	
 	public void updatePlayerUI(Monster player)
 	{
-		playerTxt.setEditable(false);
+		
 		StringBuilder p = new StringBuilder();
 		 p.append( "Player: " + player.getName()+"\nEnergy: "+ player.getEnergy()+ "\nOriginal Role: " + player.getOriginalRole());
 		if(player.isConfused())
@@ -117,6 +117,7 @@ public class Controller {
 		if(player.isShielded())
 			p.append("\nShield");
 		playerTxt.setText(p.toString());
+		playerTxt.setEditable(false);
 	}
 	public void updateOppUI(Monster opp)
 	{

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import game.engine.controller.Controller;
 import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InvalidMoveException;
 import game.engine.exceptions.OutOfEnergyException;
@@ -16,6 +17,7 @@ public class Game {
 	private Monster player;
 	private Monster opponent;
 	private Monster current;
+	
 	
 	public Game(Role playerRole) throws IOException {
 		this.board = new Board(DataLoader.readCards());
@@ -91,6 +93,9 @@ public class Game {
 		}
 		
 		int roll = rollDice();
+		
+		Controller.setRoll(roll);
+
 		
 		board.moveMonster(current, roll, getCurrentOpponent());
 		

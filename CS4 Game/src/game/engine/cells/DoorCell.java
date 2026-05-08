@@ -60,6 +60,7 @@ public class DoorCell extends Cell implements CanisterModifier {
 		}
 		
 		setActivated(true);
+		
 	}
 
 	@Override

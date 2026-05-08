@@ -3,146 +3,273 @@ package game.engine.controller;
 import java.io.IOException;
 
 import game.engine.*;
+import game.engine.cells.CardCell;
 import game.engine.cells.Cell;
+import game.engine.cells.ContaminationSock;
+import game.engine.cells.ConveyorBelt;
+import game.engine.cells.DoorCell;
+import game.engine.cells.MonsterCell;
 import game.engine.exceptions.*;
-import game.engine.monsters.Monster;
+import game.engine.monsters.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-
-
+import javafx.scene.shape.Shape;
 
 public class Controller {
-	@FXML
+
 	private Game game;
+	@FXML
+	private Rectangle player;
+	@FXML
+	private Circle opponent;
+	
 	private SceneController sc = new SceneController();
-	public TextArea playerTxt = new TextArea("");
+
+	@FXML
+	private TextArea playerTxt;
+
+	@FXML
 	private ProgressBar playerEnergy;
-	private TextArea oppTxt = new TextArea("");
-	private GridPane boardGrid=new GridPane();
+
+	@FXML
+	private TextArea oppTxt;
+
+	@FXML
+	private GridPane boardGrid;
+
 	private StackPane[] cells;
 	
-	
-	
-	private void boardUI() {
+	public static int  roll;
+
+	public void boardUI() {
 		cells = new StackPane[100];
+	
+		
 		for (int i = 0; i < cells.length; i++) {
 			StackPane cell = createCell(i);
 			cells[i] = cell;
-			boardGrid.add(cell, indexToRowCol(i)[1], indexToRowCol(i)[0] );
+			boardGrid.add(cell, indexToRowCol(i)[1], indexToRowCol(i)[0]);
 		}
-		
+		cells[0].getChildren().addAll(player, opponent);
 	}
+
 	private int[] indexToRowCol(int index) {
-	    int cols = Constants.BOARD_COLS;
-	    int row = index / cols;
-	    int col = index % cols;
-	    if (row % 2 == 1)
-	        col = cols - 1 - col;
-	    row = (Constants.BOARD_ROWS - 1) - row; 
-	    return new int[]{row, col};
+		int cols = Constants.BOARD_COLS;
+		int row = index / cols;
+		int col = index % cols;
+		if (row % 2 == 1)
+			col = cols - 1 - col;
+		row = (Constants.BOARD_ROWS - 1) - row;
+		return new int[] { row, col };
 	}
-	
+
+	private int[] indexToRowCol2(int index) {
+		int cols = Constants.BOARD_COLS;
+
+		int row = index / cols;
+		int col = index % cols;
+
+		if (row % 2 == 1)
+			col = cols - 1 - col;
+
+		return new int[] { row, col };
+	}
+
 	private StackPane createCell(int i) {
-		Rectangle r = new Rectangle(60, 60, Color.RED);
-		Label l = new Label(i+ " ");
+		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
+		Rectangle r;
+		Label l2 = new Label("");
+		if (c instanceof ConveyorBelt)
+			r = new Rectangle(60, 60, Color.GREEN);
+		else if (c instanceof ContaminationSock)
+			r = new Rectangle(60, 60, Color.ORANGE);
+		else if (c instanceof CardCell)
+			r = new Rectangle(60, 60, Color.RED);
+
+		else if (c instanceof MonsterCell)
+			r = new Rectangle(60, 60, Color.BLUE);
+		else if (c instanceof DoorCell){
+			r = new Rectangle(60, 60, Color.PURPLE);
+			l2 = new Label(""+((DoorCell)c).getEnergy());
+			l2.setTextFill(Color.WHITE);
+		}
+		else
+			r = new Rectangle(60, 60, Color.YELLOW);
+		Label l = new Label(i + " ");
+		l.setTranslateX(-17); l.setTranslateY(-20);
 		StackPane sp = new StackPane();
-		sp.getChildren().addAll(r,l);
+		if(c instanceof DoorCell)
+			sp.getChildren().addAll(r, l,l2);
+		else
+			sp.getChildren().addAll(r, l);
 		return sp;
 	}
-	
-	
-	
-	
-	
-	public void chooseScarer(ActionEvent e) throws IOException	
-	{
+
+	@FXML
+	public void chooseScarer(ActionEvent e) throws IOException {
 		game = new Game(Role.SCARER);
-		sc.switchToGame(e);
-		System.out.println("Your Monster is: "+game.getPlayer().getName());
-		updatePlayerUI(game.getPlayer());
-		updateOppUI(game.getOpponent());
-		boardUI();
-		
+		sc.switchToGame(e, game);
+		setGame(game);
+		System.out.println("Your Monster is: " + game.getPlayer().getName());
+
 	}
-	public void chooseLaugher(ActionEvent e) throws IOException
-	{
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@FXML
+	public void chooseLaugher(ActionEvent e) throws IOException {
 		game = new Game(Role.LAUGHER);
-		sc.switchToGame(e);
-		updatePlayerUI(game.getPlayer());
-		updateOppUI(game.getOpponent());
-		System.out.println("Your Monster is: "+game.getPlayer().getName());
-		boardUI();
+		sc.switchToGame(e, game);
+		setGame(game);
+		System.out.println("Your Monster is: " + game.getPlayer().getName());
 	}
-	public void rollUI(ActionEvent l) throws InvalidMoveException
-	{	try{
-		
-		game.playTurn();
-		updatePlayerUI(game.getPlayer());
-		updateOppUI(game.getOpponent());
-		}
-	catch(Exception e){
-		e.printStackTrace();
-		}
-	}
-	public void usePowerUpUI(ActionEvent l) throws OutOfEnergyException
-	{
-		try
-		{game.usePowerup();
-		
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
+
+	@FXML
+	public void rollUI(ActionEvent l) throws InvalidMoveException, IOException {
+		try {
+			int ogPos = game.getCurrent().getPosition();
+			clearOldPos(ogPos,game.getCurrent());
+			Monster curr = game.getCurrent();
+			game.playTurn();
 			
+			System.out.println(Controller.roll);
+			updatePlayerUI(game.getPlayer());
+			updateOppUI(game.getOpponent());
+			moveUI(curr);
+		} catch (InvalidMoveException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	public void updatePlayerUI(Monster player)
+	public  void clearOldPos(int ogPos,Monster curr)
 	{
+		Shape s;
+		if(curr.equals(game.getPlayer()))
+		{
+			s = player;
+		}
+		else
+			s= opponent;
+		StackPane sp = cells[ogPos];
+		sp.getChildren().remove(s);
+	}
+	public void moveUI(Monster curr) throws IOException
+	{
+		Shape s;
+		if(curr.equals(game.getPlayer()))
+		{
+			s = player;
+		}
+		else
+			s= opponent;
 		
+		int pos =curr.getPosition();
+		
+		
+		int[] x= indexToRowCol2(pos);
+		if(game.getBoard().getBoardCells()[x[0]][x[1]] instanceof DoorCell)
+			updateDoorCells(pos);
+		
+
+		StackPane sp = cells[pos];
+		sp.getChildren().add(s);
+		if(game.getWinner()!=null)
+		{
+		//	if(game.getWinner()== game.getPlayer())
+		//		sc.switchToGameOver("YOU WON!");
+		//	else
+		//		sc.switchToGameOver("YOU LOSE!");
+		}
+	}
+	public void updateDoorCells(int i)
+	{
+		StackPane sp = cells[i];
+		sp.getChildren().removeAll();
+		Rectangle r = new Rectangle(60, 60, Color.YELLOW);
+		Label l = new Label(i + " ");
+		l.setTranslateX(-17); l.setTranslateY(-20);
+		sp.getChildren().addAll(r, l);
+	}
+	public static void setRoll(int rol)
+	{
+		Controller.roll=rol;
+	}
+	
+	
+	@FXML
+	public void usePowerUpUI(ActionEvent l) {
+		try {
+			game.usePowerup();
+			updateOppUI(game.getOpponent());
+			updatePlayerUI(game.getPlayer());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void updatePlayerUI(Monster player) {
 		StringBuilder p = new StringBuilder();
-		 p.append( "Player: " + player.getName()+"\nEnergy: "+ player.getEnergy()+ "\nOriginal Role: " + player.getOriginalRole());
-		if(player.isConfused())
-				p.append( "\nCurrent Role: " + player.getRole()+ "\nConfusion turns left: "+ player.getConfusionTurns());		
-		if(player.isFrozen())
+		p.append("Player: " + player.getName() + "\nEnergy: "
+				+ player.getEnergy() + "\nOriginal Role: "
+				+ player.getOriginalRole() + "\nPosition: "
+				+ player.getPosition() + "\nMonster Type: ");
+		if (player instanceof Dynamo)
+			p.append("Dynamo");
+		if (player instanceof MultiTasker)
+			p.append("MultiTasker");
+		if (player instanceof Schemer)
+			p.append("Schemer");
+		if (player instanceof Dasher)
+			p.append("Dasher");
+		if (player.isConfused())
+			p.append("\nCurrent Role: " + player.getRole()
+					+ "\nConfusion turns left: " + player.getConfusionTurns());
+		if (player.isFrozen())
 			p.append("\nFrozen");
-		if(player.isShielded())
+		if (player.isShielded())
 			p.append("\nShield");
+
 		playerTxt.setText(p.toString());
 		playerTxt.setEditable(false);
 	}
-	public void updateOppUI(Monster opp)
-	{
+
+	public void updateOppUI(Monster opp) {
+		StringBuilder s = new StringBuilder();
+		s.append("Opponent: " + opp.getName() + "\nEnergy: " + opp.getEnergy()
+				+ "\nOriginal Role: " + opp.getOriginalRole() + "\nPosition: "
+				+ opp.getPosition() + "\nMonster Type: ");
+		if (opp instanceof Dynamo)
+			s.append("Dynamo");
+		if (opp instanceof MultiTasker)
+			s.append("MultiTasker");
+		if (opp instanceof Schemer)
+			s.append("Schemer");
+		if (opp instanceof Dasher)
+			s.append("Dasher");
+		if (opp.isConfused())
+			s.append("\nCurrent Role: " + opp.getRole()
+					+ "\nConfusion turns left: " + opp.getConfusionTurns());
+		if (opp.isFrozen())
+			s.append("\nFrozen");
+		if (opp.isShielded())
+			s.append("\nShield");
+		oppTxt.setText(s.toString());
 		oppTxt.setEditable(false);
-		String s = "Opponent: " + opp.getName()+"\nEnergy: "+ opp.getEnergy()+ "\nOriginal Role: " + opp.getOriginalRole();
-		if(opp.isConfused())
-				s+= "\nCurrent Role: " + opp.getRole()+ "\nConfusion turns left: "+ opp.getConfusionTurns();
-		if(opp.isFrozen())
-			s+="\nFrozen";
-		if(opp.isShielded())
-			s+="\nShield";
-		oppTxt.setText(s);
 	}
-//	public void setCellImages(GridPane gp)
-//	{
-//		
-//		
-//		for (int i = 0; i < Constants.BOARD_ROWS; i++) {
-//			for (int j = 0; j <  Constants.BOARD_COLS; j++) {
-//				Cell c= game.getBoard().getBoardCells()[i][j];
-////				if(c instanceof Cell)
-//					
-//			}
-//			
-//		}
-//		
-//	}
 }

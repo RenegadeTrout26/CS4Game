@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Console">
+   <children>
+      <Label layoutX="179.0" layoutY="84.0" text="Choose your role" textAlignment="CENTER">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <Button layoutX="135.0" layoutY="392.0" mnemonicParsing="false" onAction="#chooseScarer" prefHeight="62.0" prefWidth="144.0" text="Scarer" textFill="RED">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button layoutX="422.0" layoutY="392.0" mnemonicParsing="false" onAction="#chooseLaugher" prefHeight="62.0" prefWidth="144.0" text="Laugher" textFill="#0040ff">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

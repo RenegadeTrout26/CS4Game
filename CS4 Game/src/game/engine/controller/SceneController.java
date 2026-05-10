@@ -88,6 +88,7 @@ public class SceneController {
 	    controller.updatePlayerUI(game.getPlayer());
 	    controller.updateOppUI(game.getOpponent());
 	    controller.boardUI();
+	    controller.initializeCardsUI();
 	}
 	@FXML
 	public void handleCloseButton(ActionEvent event) 

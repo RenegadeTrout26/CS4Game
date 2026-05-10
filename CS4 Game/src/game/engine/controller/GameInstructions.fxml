@@ -17,7 +17,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <TextArea layoutX="63.0" layoutY="135.0" prefHeight="478.0" prefWidth="586.0" text="Welcome to DoorDash! This is a snakes and Ladders varient where you play with Monsters Inc. characters.&#10;How To Play: 1- You will choose your role: Laugher (Blue)/ Scarer (Red)&#10;2- Each turn, player could choose to use PowerUp if they have enough energy (500+ energy), or roll Dice&#10;3- Each Monster has different Abilities based on their Types: Dasher, Dynamo, Multitasker, Schemer&#10;4- Each Cell has a different effect on player (DoorCells give or take energy, transportCells change positions... etc)&#10;5- Your goal is to reach Cell number 99 with 1000+ energy , if you don't have enough energy you loop back from Cell 0" wrapText="true">
+      <TextArea editable="false" layoutX="63.0" layoutY="135.0" prefHeight="478.0" prefWidth="586.0" text="Welcome to DoorDash! This is a snakes and Ladders varient where you play with Monsters Inc. characters.&#10;How To Play: 1- You will choose your role: Laugher (Blue)/ Scarer (Red)&#10;2- Each turn, player could choose to use PowerUp if they have enough energy (500+ energy), or roll Dice&#10;3- Each Monster has different Abilities based on their Types: Dasher, Dynamo, Multitasker, Schemer&#10;4- Each Cell has a different effect on player (DoorCells give or take energy, transportCells change positions... etc)&#10;5- Your goal is to reach Cell number 99 with 1000+ energy , if you don't have enough energy you loop back from Cell 0" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></TextArea>

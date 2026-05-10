@@ -3,6 +3,7 @@ package game.engine.controller;
 import java.io.IOException;
 
 import game.engine.*;
+import game.engine.cards.Card;
 import game.engine.cells.CardCell;
 import game.engine.cells.Cell;
 import game.engine.cells.ContaminationSock;
@@ -42,6 +43,9 @@ public class Controller {
 
 	@FXML
 	private ProgressBar playerEnergy;
+	
+	@FXML
+	private ProgressBar oppEnergy;
 
 	@FXML
 	private TextArea oppTxt;
@@ -50,6 +54,9 @@ public class Controller {
 	private GridPane boardGrid;
 
 	private StackPane[] cells;
+	
+	@FXML
+	private StackPane cards ;
 	
 	public static int  roll;
 
@@ -156,29 +163,52 @@ public class Controller {
 		try {
 			Monster curr = game.getCurrent();
 			int ogPos = game.getCurrent().getPosition();
+			String s;
+			
+			
 			clearOldPos(ogPos,game.getCurrent());
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
-			moveUI(curr);
-			String s;
+			
+			
+			
 			game.playTurn();
+			
 			updateConsole( "\nDice Roll: "+Controller.roll);
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
 			moveUI(curr);
+			
+			
 			if(game.getWinner()!=null)
 				getWinText(l);
 			if(curr==game.getPlayer())
 				s= "Player 2";
 			else
 				s= "Player 1";
+			
+			
 			updateConsole("\n"+ (++counter) +"- "+ s +"'s turn: ");
+			
 		} catch (InvalidMoveException e) {
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
+			resetPos(game.getCurrent().getPosition(), game.getCurrent());
 			e.printStackTrace();
-	
+			
 		}
+	}
+	public void resetPos(int pos, Monster curr)
+	{
+		Shape s;
+		if(curr.equals(game.getPlayer()))
+		{
+			s = player;
+		}
+		else
+			s= opponent;
+		StackPane sp = cells[pos];
+		sp.getChildren().add(s);
 	}
 	
 	public  void clearOldPos(int ogPos,Monster curr)
@@ -207,11 +237,8 @@ public class Controller {
 		
 		
 		int[] x= indexToRowCol2(pos);
-		if(game.getBoard().getBoardCells()[x[0]][x[1]] instanceof DoorCell)
-			updateDoorCells(pos);
-		if(game.getBoard().getBoardCells()[x[0]][x[1]] instanceof MonsterCell)
-			updateMonsterCells(pos);
-
+	
+		onLandUI(pos,game.getBoard().getBoardCells()[x[0]][x[1]]);
 		StackPane sp = cells[pos];
 		sp.getChildren().add(s);
 	
@@ -285,6 +312,13 @@ public class Controller {
 
 		playerTxt.setText(p.toString());
 		playerTxt.setEditable(false);
+		
+		double en = player.getEnergy();
+		if(en==0)
+			playerEnergy.setProgress(0);
+		else
+			playerEnergy.setProgress(en/Constants.WINNING_ENERGY);
+	
 	}
 
 	public void updateOppUI(Monster opp) {
@@ -309,6 +343,12 @@ public class Controller {
 			s.append("\nShield");
 		oppTxt.setText(s.toString());
 		oppTxt.setEditable(false);
+		
+		double en = opp.getEnergy();
+		if(en==0)
+			oppEnergy.setProgress(0);
+		else
+			oppEnergy.setProgress(en/Constants.WINNING_ENERGY);
 	}
 	public void updateConsole(String s)
 	{
@@ -326,7 +366,50 @@ public class Controller {
 	}
 	@FXML
 	public void mainMenuButton(ActionEvent e) throws IOException
+
 	{
 		sc.switchToStartMenu(e);
+	}
+	
+	public void initializeCardsUI()
+	{
+		for (int i = 0; i < 25; i++) {
+			Rectangle r = new Rectangle(90,150,Color.AQUA);
+			r.setStroke(Color.BLACK);
+			r.setTranslateX(-i+0.5);
+			cards.getChildren().add(r);
+		}
+	}
+	public void drawCardUI()
+	{
+		if(cards.getChildren().size()!=1)
+		cards.getChildren().remove(cards.getChildren().size()-1);
+		else
+			initializeCardsUI();
+	}
+	
+	public void onLandUI(int pos, Cell c)
+	{
+		if(c instanceof DoorCell)
+			
+			{
+			updateDoorCells(pos);
+			updateConsole("\nYou landed on Door Cell " + pos);
+			}
+		else if(c instanceof MonsterCell)
+			{
+			updateMonsterCells(pos);
+			updateConsole("\nYou landed on Monster Cell " + pos);
+			}
+		else if(c instanceof CardCell)
+		{
+			drawCardUI();
+			updateConsole("\nYou landed on Card Cell " + pos);
+		}
+		
+		else if(c instanceof Cell )
+		{
+			updateConsole("\nYou landed on Cell " + pos);
+		}
 	}
 }

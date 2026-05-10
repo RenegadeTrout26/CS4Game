@@ -2,6 +2,7 @@ package game.engine.monsters;
 
 import game.engine.Constants;
 import game.engine.Role;
+import game.engine.controller.Controller;
 
 public abstract class Monster implements Comparable<Monster> {
 	private String name;
@@ -13,6 +14,7 @@ public abstract class Monster implements Comparable<Monster> {
 	private boolean frozen;
 	private boolean shielded;
 	private int confusionTurns;
+	private Controller c;
 	
 	public Monster(String name, String description, Role originalRole, int energy) {
 		super();
@@ -69,6 +71,7 @@ public abstract class Monster implements Comparable<Monster> {
 	
 	public void setFrozen(boolean frozen) {
 		this.frozen = frozen;
+		c.updateConsole("\nFREEZE!");
 	}
 	
 	public boolean isShielded() {

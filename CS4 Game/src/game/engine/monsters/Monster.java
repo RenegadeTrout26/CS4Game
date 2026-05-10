@@ -14,7 +14,7 @@ public abstract class Monster implements Comparable<Monster> {
 	private boolean frozen;
 	private boolean shielded;
 	private int confusionTurns;
-	private Controller c;
+	private Controller c = new Controller();
 	
 	public Monster(String name, String description, Role originalRole, int energy) {
 		super();
@@ -71,7 +71,7 @@ public abstract class Monster implements Comparable<Monster> {
 	
 	public void setFrozen(boolean frozen) {
 		this.frozen = frozen;
-		c.updateConsole("\nFREEZE!");
+		
 	}
 	
 	public boolean isShielded() {

@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="962.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
+<AnchorPane prefHeight="962.0" prefWidth="1458.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
    <children>
       <Button layoutX="352.0" layoutY="882.0" mnemonicParsing="false" onAction="#rollUI" prefHeight="57.0" prefWidth="125.0" text="Roll" textAlignment="CENTER" textFill="#ff0e0e" />
       <ImageView fitHeight="168.0" fitWidth="88.0" layoutX="61.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
@@ -152,11 +153,14 @@
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="6" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="7" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-            <Circle fx:id="opponent" fill="#e51fff45" radius="23.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="9" />
-            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#1fff8bb5" height="29.0" stroke="BLACK" strokeType="INSIDE" width="18.0" GridPane.rowIndex="9" />
+            <Circle fx:id="opponent" fill="#e51fff45" radius="23.0" smooth="false" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.2" GridPane.rowIndex="9" />
+            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#1fff8bb5" height="35.0" stroke="BLACK" strokeType="INSIDE" width="28.0" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <TextArea fx:id="playerTxt" layoutX="14.0" layoutY="270.0" prefHeight="305.0" prefWidth="323.0" />
       <TextArea fx:id="oppTxt" layoutX="1056.0" layoutY="571.0" prefHeight="216.0" prefWidth="286.0" />
+      <Button layoutX="1216.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainMenuButton" prefHeight="57.0" prefWidth="125.0" text="Main Menu" textAlignment="CENTER" textFill="#0f3bff" />
+      <TextArea fx:id="console" layoutX="1407.0" layoutY="3.0" prefHeight="963.0" prefWidth="331.0" text="Game Start: &#10;1- Player 1's turn:" wrapText="true" />
+      <Line endX="-19.0" endY="51.0" layoutX="1429.0" layoutY="911.0" startX="-19.0" startY="-911.0" />
    </children>
 </AnchorPane>

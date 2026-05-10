@@ -36,6 +36,9 @@ public class Controller {
 
 	@FXML
 	private TextArea playerTxt;
+	@FXML
+	private TextArea console;
+	private int counter=1;
 
 	@FXML
 	private ProgressBar playerEnergy;
@@ -96,18 +99,28 @@ public class Controller {
 			r = new Rectangle(60, 60, Color.RED);
 
 		else if (c instanceof MonsterCell)
-			r = new Rectangle(60, 60, Color.BLUE);
+		{
+			r = new Rectangle(60, 60, Color.LIGHTBLUE);	
+			l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
+			if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
+			l2.setTextFill(Color.BLUE);
+			else
+				l2.setTextFill(Color.INDIANRED);
+		}
 		else if (c instanceof DoorCell){
-			r = new Rectangle(60, 60, Color.PURPLE);
+			r = new Rectangle(60, 60, Color.MEDIUMPURPLE);
 			l2 = new Label(""+((DoorCell)c).getEnergy());
-			l2.setTextFill(Color.WHITE);
+			if(((DoorCell)c).getRole().equals(Role.LAUGHER))
+			l2.setTextFill(Color.BLUE);
+			else
+				l2.setTextFill(Color.RED);
 		}
 		else
 			r = new Rectangle(60, 60, Color.YELLOW);
 		Label l = new Label(i + " ");
 		l.setTranslateX(-17); l.setTranslateY(-20);
 		StackPane sp = new StackPane();
-		if(c instanceof DoorCell)
+		if(c instanceof DoorCell || c instanceof MonsterCell)
 			sp.getChildren().addAll(r, l,l2);
 		else
 			sp.getChildren().addAll(r, l);
@@ -126,7 +139,6 @@ public class Controller {
 	public Game getGame() {
 		return game;
 	}
-
 	public void setGame(Game game) {
 		this.game = game;
 	}
@@ -142,17 +154,30 @@ public class Controller {
 	@FXML
 	public void rollUI(ActionEvent l) throws InvalidMoveException, IOException {
 		try {
+			Monster curr = game.getCurrent();
 			int ogPos = game.getCurrent().getPosition();
 			clearOldPos(ogPos,game.getCurrent());
-			Monster curr = game.getCurrent();
-			game.playTurn();
-			
-			System.out.println(Controller.roll);
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
 			moveUI(curr);
+			String s;
+			game.playTurn();
+			updateConsole( "\nDice Roll: "+Controller.roll);
+			updatePlayerUI(game.getPlayer());
+			updateOppUI(game.getOpponent());
+			moveUI(curr);
+			if(game.getWinner()!=null)
+				getWinText(l);
+			if(curr==game.getPlayer())
+				s= "Player 2";
+			else
+				s= "Player 1";
+			updateConsole("\n"+ (++counter) +"- "+ s +"'s turn: ");
 		} catch (InvalidMoveException e) {
+			updatePlayerUI(game.getPlayer());
+			updateOppUI(game.getOpponent());
 			e.printStackTrace();
+	
 		}
 	}
 	
@@ -184,17 +209,12 @@ public class Controller {
 		int[] x= indexToRowCol2(pos);
 		if(game.getBoard().getBoardCells()[x[0]][x[1]] instanceof DoorCell)
 			updateDoorCells(pos);
-		
+		if(game.getBoard().getBoardCells()[x[0]][x[1]] instanceof MonsterCell)
+			updateMonsterCells(pos);
 
 		StackPane sp = cells[pos];
 		sp.getChildren().add(s);
-		if(game.getWinner()!=null)
-		{
-		//	if(game.getWinner()== game.getPlayer())
-		//		sc.switchToGameOver("YOU WON!");
-		//	else
-		//		sc.switchToGameOver("YOU LOSE!");
-		}
+	
 	}
 	public void updateDoorCells(int i)
 	{
@@ -209,7 +229,23 @@ public class Controller {
 	{
 		Controller.roll=rol;
 	}
-	
+	public void updateMonsterCells(int i)
+	{
+		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
+		StackPane sp = cells[i];
+		sp.getChildren().removeAll();
+		Label l2;
+		Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
+		l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
+		if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
+		l2.setTextFill(Color.BLUE);
+		else
+			l2.setTextFill(Color.INDIANRED);
+		
+		Label l = new Label(i + " ");
+		l.setTranslateX(-17); l.setTranslateY(-20);
+		sp.getChildren().addAll(r, l,l2);
+	}
 	
 	@FXML
 	public void usePowerUpUI(ActionEvent l) {
@@ -217,7 +253,9 @@ public class Controller {
 			game.usePowerup();
 			updateOppUI(game.getOpponent());
 			updatePlayerUI(game.getPlayer());
+			updateConsole("Used PowerUp!");
 		} catch (Exception e) {
+			
 
 			e.printStackTrace();
 		}
@@ -225,7 +263,7 @@ public class Controller {
 
 	public void updatePlayerUI(Monster player) {
 		StringBuilder p = new StringBuilder();
-		p.append("Player: " + player.getName() + "\nEnergy: "
+		p.append("Player 1: " + player.getName() + "\nEnergy: "
 				+ player.getEnergy() + "\nOriginal Role: "
 				+ player.getOriginalRole() + "\nPosition: "
 				+ player.getPosition() + "\nMonster Type: ");
@@ -251,7 +289,7 @@ public class Controller {
 
 	public void updateOppUI(Monster opp) {
 		StringBuilder s = new StringBuilder();
-		s.append("Opponent: " + opp.getName() + "\nEnergy: " + opp.getEnergy()
+		s.append("Player 2: " + opp.getName() + "\nEnergy: " + opp.getEnergy()
 				+ "\nOriginal Role: " + opp.getOriginalRole() + "\nPosition: "
 				+ opp.getPosition() + "\nMonster Type: ");
 		if (opp instanceof Dynamo)
@@ -271,5 +309,24 @@ public class Controller {
 			s.append("\nShield");
 		oppTxt.setText(s.toString());
 		oppTxt.setEditable(false);
+	}
+	public void updateConsole(String s)
+	{
+
+		console.appendText(s);
+		
+	}
+	public void getWinText(ActionEvent e) throws IOException
+	{
+	
+			if(game.getWinner()== game.getPlayer())
+				sc.switchToGameOver(e,"YOU WON!"+ "\nPlayer Energy: " + game.getPlayer().getEnergy()+ "\nOpponent Energy: "+ game.getOpponent().getEnergy());
+			else
+				sc.switchToGameOver(e,"YOU LOSE!"+ "\nPlayer Energy: " + game.getPlayer().getEnergy()+ "\nOpponent Energy: "+ game.getOpponent().getEnergy());
+	}
+	@FXML
+	public void mainMenuButton(ActionEvent e) throws IOException
+	{
+		sc.switchToStartMenu(e);
 	}
 }

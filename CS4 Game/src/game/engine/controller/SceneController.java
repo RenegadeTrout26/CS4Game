@@ -4,6 +4,7 @@ package game.engine.controller;
 import game.engine.Game;
 
 import java.io.IOException;
+import java.util.EventObject;
 
 import javafx.*;
 import javafx.application.Application;
@@ -20,7 +21,7 @@ public class SceneController {
 	private Scene scene;
 	private Stage stage;
 	@FXML
-	private TextArea GameOverMSG;
+	private TextArea GameOverMSG ;
 	@FXML
 	private Button closeButton =new Button();
 
@@ -41,20 +42,39 @@ public class SceneController {
 		 stage.setScene(scene);
 		 stage.show();
 	}
-	
-	@FXML
-	public void switchToGameOver(ActionEvent event) throws IOException
+	public void switchToStartMenu(ActionEvent event) throws IOException 
 	{
-		 Parent root = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
+		 Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
 		 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		 scene= new Scene(root);
 		 stage.setScene(scene);
-		
 		 stage.show();
-		 StringBuilder p = new StringBuilder();
-		 p.append("hii");
 	}
 	
+	
+	public void switchToGameOver(ActionEvent event, String s) throws IOException
+	{
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+	    Parent root = loader.load();
+	    SceneController controller = loader.getController();
+	  
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+		 TextArea g = controller.getGameOverMSG();
+			StringBuilder p = new StringBuilder();
+			p.append(s);
+			g.setText(p.toString());
+			g.setEditable(false);
+	}
+	
+	public TextArea getGameOverMSG() {
+		return GameOverMSG;
+	}
+	public void setGameOverMSG(TextArea gameOverMSG) {
+		GameOverMSG = gameOverMSG;
+	}
 	public void switchToGame(ActionEvent event, Game game) throws IOException {
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource("gameGUI.fxml"));
 	    Parent root = loader.load();
@@ -78,6 +98,15 @@ public class SceneController {
 	        {
 	            ((Stage) window).close(); 
 	        }
+	}
+	
+	public void updateGameOverScreen(String s)
+	{
+		GameOverMSG = new TextArea();
+		StringBuilder p = new StringBuilder();
+		p.append(s);
+		GameOverMSG.setText(p.toString());
+		GameOverMSG.setEditable(false);
 	}
 }
 

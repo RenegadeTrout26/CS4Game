@@ -2,9 +2,12 @@ package game.engine.cells;
 
 import game.engine.Board;
 import game.engine.cards.Card;
+import game.engine.controller.Controller;
 import game.engine.monsters.Monster;
 
 public class CardCell extends Cell {
+	
+	
 	
 	public CardCell(String name) {
         super(name);
@@ -15,6 +18,7 @@ public class CardCell extends Cell {
     	super.onLand(landingMonster, opponentMonster);
     	
         Card card = Board.drawCard();
+        Controller.setTempWord("\n"+card.getName()+"\n"+card.getDescription());
         card.performAction(landingMonster, opponentMonster);
     }
    

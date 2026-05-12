@@ -28,6 +28,7 @@ import javafx.scene.shape.Shape;
 public class Controller {
 
 	private Game game;
+	public static String tempWord;
 	@FXML
 	private Rectangle player;
 	@FXML
@@ -43,6 +44,7 @@ public class Controller {
 
 	@FXML
 	private ProgressBar playerEnergy;
+	
 	
 	@FXML
 	private ProgressBar oppEnergy;
@@ -132,6 +134,7 @@ public class Controller {
 		else
 			sp.getChildren().addAll(r, l);
 		return sp;
+		
 	}
 
 	@FXML
@@ -356,6 +359,11 @@ public class Controller {
 		console.appendText(s);
 		
 	}
+	public void updateConsole2()
+	{
+		console.appendText(tempWord);
+	}
+
 	public void getWinText(ActionEvent e) throws IOException
 	{
 	
@@ -385,7 +393,11 @@ public class Controller {
 		if(cards.getChildren().size()!=1)
 		cards.getChildren().remove(cards.getChildren().size()-1);
 		else
+			
+			{
 			initializeCardsUI();
+			drawCardUI();
+			}
 	}
 	
 	public void onLandUI(int pos, Cell c)
@@ -403,8 +415,10 @@ public class Controller {
 			}
 		else if(c instanceof CardCell)
 		{
-			drawCardUI();
 			updateConsole("\nYou landed on Card Cell " + pos);
+			drawCardUI();
+			updateConsole2();
+
 		}
 		
 		else if(c instanceof Cell )
@@ -412,4 +426,9 @@ public class Controller {
 			updateConsole("\nYou landed on Cell " + pos);
 		}
 	}
+
+	public static void setTempWord(String s) {
+		tempWord = s;
+	}
+
 }

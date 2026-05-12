@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import game.engine.cards.Card;
 import game.engine.cells.*;
+import game.engine.controller.Controller;
 import game.engine.exceptions.InvalidMoveException;
 import game.engine.monsters.Monster;
 
@@ -13,6 +14,7 @@ public class Board {
 	private static ArrayList<Monster> stationedMonsters; 
 	private static ArrayList<Card> originalCards;
 	public static ArrayList<Card> cards;
+	
 	
 	public Board(ArrayList<Card> readCards) {
 		this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
@@ -120,6 +122,7 @@ public class Board {
 	public static Card drawCard() {
 		if (cards.isEmpty()) 
 			reloadCards();
+		
 		
 		return cards.remove(0);
 	}

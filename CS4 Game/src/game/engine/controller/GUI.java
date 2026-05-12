@@ -15,7 +15,7 @@ import game.engine.cells.*;;
 
 public class GUI extends Application{
 
-	private Game game;
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("DoorDash");

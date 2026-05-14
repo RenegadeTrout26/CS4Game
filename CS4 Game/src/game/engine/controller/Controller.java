@@ -267,22 +267,44 @@ public class Controller {
 	{
 		Controller.roll=rol;
 	}
-	public void updateMonsterCells(int i)
+//	public void updateMonsterCells(int i)
+//	{
+//		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
+//		StackPane sp = cells[i];
+//		sp.getChildren().removeAll();
+//		Label l2;
+//		Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
+//		l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
+//		if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
+//		l2.setTextFill(Color.BLUE);
+//		else
+//			l2.setTextFill(Color.INDIANRED);
+//		
+//		Label l = new Label(i + " ");
+//		l.setTranslateX(-17); l.setTranslateY(-20);
+//		sp.getChildren().addAll(r, l,l2);
+//	}
+	public void updateMonsterCells()
 	{
-		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
-		StackPane sp = cells[i];
-		sp.getChildren().removeAll();
-		Label l2;
-		Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
-		l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
-		if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
-		l2.setTextFill(Color.BLUE);
-		else
-			l2.setTextFill(Color.INDIANRED);
-		
-		Label l = new Label(i + " ");
-		l.setTranslateX(-17); l.setTranslateY(-20);
-		sp.getChildren().addAll(r, l,l2);
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
+			if(c instanceof MonsterCell)
+			{
+				StackPane sp = cells[i];
+				sp.getChildren().removeAll();
+				Label l2;
+				Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
+				l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
+				if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
+				l2.setTextFill(Color.BLUE);
+				else
+					l2.setTextFill(Color.INDIANRED);
+				
+				Label l = new Label(i + " ");
+				l.setTranslateX(-17); l.setTranslateY(-20);
+				sp.getChildren().addAll(r, l,l2);
+			}
+		}
 	}
 	
 	@FXML
@@ -429,7 +451,7 @@ public class Controller {
 			}
 		else if(c instanceof MonsterCell)
 			{
-			updateMonsterCells(pos);
+			updateMonsterCells();
 			updateConsole("\nYou landed on Monster Cell " + pos);
 			}
 		else if(c instanceof CardCell)

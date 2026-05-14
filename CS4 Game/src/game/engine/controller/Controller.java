@@ -13,20 +13,26 @@ import game.engine.cells.MonsterCell;
 import game.engine.exceptions.*;
 import game.engine.monsters.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 
 public class Controller {
 
+	private boolean isExceptionActive;
 	private Game game;
 	public static String tempWord;
 	@FXML
@@ -164,6 +170,8 @@ public class Controller {
 	@FXML
 	public void rollUI(ActionEvent l) throws InvalidMoveException, IOException {
 		try {
+			if(!isExceptionActive)
+			{
 			Monster curr = game.getCurrent();
 			int ogPos = game.getCurrent().getPosition();
 			String s;
@@ -192,12 +200,12 @@ public class Controller {
 			
 			
 			updateConsole("\n"+ (++counter) +"- "+ s +"'s turn: ");
-			
+			}
 		} catch (InvalidMoveException e) {
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
 			resetPos(game.getCurrent().getPosition(), game.getCurrent());
-			e.printStackTrace();
+			displayInvalidMoveException("Invalid Move", "Cannot land on the same cell as your opponent!");
 			
 		}
 	}
@@ -280,14 +288,17 @@ public class Controller {
 	@FXML
 	public void usePowerUpUI(ActionEvent l) {
 		try {
+			if(!isExceptionActive)
+			{
 			game.usePowerup();
 			updateOppUI(game.getOpponent());
 			updatePlayerUI(game.getPlayer());
 			updateConsole("Used PowerUp!");
+		}
 		} catch (Exception e) {
 			
 
-			e.printStackTrace();
+			displayNotEnoughEnergyException("Not Enough Energy!", "You need 500 energy to use a powerUp!");
 		}
 	}
 
@@ -300,11 +311,19 @@ public class Controller {
 		if (player instanceof Dynamo)
 			p.append("Dynamo");
 		if (player instanceof MultiTasker)
+			{
 			p.append("MultiTasker");
+			if(((MultiTasker)player).getNormalSpeedTurns()!=0)
+			p.append("\nPower Up ACTIVATED: \nNormal speed for: "+ ((MultiTasker)player).getNormalSpeedTurns()+ " turns");
+			}
 		if (player instanceof Schemer)
 			p.append("Schemer");
 		if (player instanceof Dasher)
+			{
 			p.append("Dasher");
+			if(((Dasher)player).getMomentumTurns()!=0)
+				p.append("\nPower Up ACTIVATED: \nIncreased momentum for:  "+ ((Dasher)player).getMomentumTurns()+ " turns");
+			}
 		if (player.isConfused())
 			p.append("\nCurrent Role: " + player.getRole()
 					+ "\nConfusion turns left: " + player.getConfusionTurns());
@@ -430,5 +449,55 @@ public class Controller {
 	public static void setTempWord(String s) {
 		tempWord = s;
 	}
+	
+	
+    private void displayInvalidMoveException(String title, String message) {
+        Stage alertStage = new Stage();
+        alertStage.setTitle(title);
 
+        Label label = new Label(message);
+        Button closeButton = new Button("Roll Again");
+        closeButton.setOnAction( new EventHandler<ActionEvent>()
+        		{
+        		public void handle(ActionEvent e)
+        		{
+        			isExceptionActive=false;
+        			alertStage.close();
+        		}
+        
+        		});
+
+        BorderPane pane = new BorderPane();
+        pane.setTop(label);
+        pane.setCenter(closeButton);
+
+        Scene scene = new Scene(pane, 500, 100);
+        alertStage.setScene(scene);
+        alertStage.show();
+    }
+    private void displayNotEnoughEnergyException(String title, String message) {
+        isExceptionActive=true;
+    	Stage alertStage = new Stage();
+        alertStage.setTitle(title);
+
+        Label label = new Label(message);
+        Button closeButton = new Button("Got it!");
+        closeButton.setOnAction( new EventHandler<ActionEvent>()
+        		{
+        		public void handle(ActionEvent e)
+        		{
+        			isExceptionActive=false;
+        			alertStage.close();
+        		}
+        
+        		});
+     
+        BorderPane pane = new BorderPane();
+        pane.setTop(label);
+        pane.setCenter(closeButton);
+
+        Scene scene = new Scene(pane, 500, 100);
+        alertStage.setScene(scene);
+        alertStage.show();
+    }
 }

@@ -15,6 +15,7 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.*;
 
 public class SceneController {
@@ -109,6 +110,9 @@ public class SceneController {
 		GameOverMSG.setText(p.toString());
 		GameOverMSG.setEditable(false);
 	}
+	
+	
+
 }
 
 

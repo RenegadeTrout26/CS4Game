@@ -129,7 +129,7 @@ public class Controller {
 		if (c instanceof ConveyorBelt)
 			r = new Rectangle(60, 60, Color.GREEN);
 		else if (c instanceof ContaminationSock)
-			r = new Rectangle(60, 60, Color.ORANGE);
+			return createSockCell(i);
 		else if (c instanceof CardCell)
 			r = new Rectangle(60, 60, Color.RED);
 
@@ -162,6 +162,34 @@ public class Controller {
 		return sp;
 		
 	}
+
+	private StackPane createSockCell(int i) {
+		
+			StackPane sp = new StackPane();
+
+			Label indexLabel = new Label(i + " ");
+			indexLabel.setTranslateX(-17);
+			indexLabel.setTranslateY(-20);
+
+			ImageView sockImage = createSockImageView();
+			if (sockImage != null)
+				sp.getChildren().addAll(sockImage, indexLabel);
+			else
+				sp.getChildren().addAll(new Rectangle(60, 60, Color.ORANGE), indexLabel);
+
+			return sp;
+		}
+
+		private ImageView createSockImageView() {
+			String image = "ContaminationSock.jpeg";
+
+			ImageView sockImageView = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
+			sockImageView.setFitWidth(60);
+			sockImageView.setFitHeight(60);
+			sockImageView.setPreserveRatio(false);
+			return sockImageView;
+		}
+
 
 	public void chooseScarer(ActionEvent e) throws IOException {
 		game = new Game(Role.SCARER);

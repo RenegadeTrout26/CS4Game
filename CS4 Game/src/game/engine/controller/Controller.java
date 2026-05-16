@@ -547,6 +547,41 @@ public class Controller {
         alertStage.show();
     }}
     
+    @FXML
+    public void displayMonsterTypes(ActionEvent e) {
+        if(!isExceptionActive)
+        {
+    	isExceptionActive=true;
+    	Stage alertStage = new Stage();
+        alertStage.setTitle("Monster Types");
+        
+        Label label = new Label("MONSTER TYPES: ");
+        TextArea monsterTypes = new TextArea("Dasher: Speed and agility are everything. Get to the door, get the energy, get out!. you move double the speed of any monster. you can dash to the doors quicker by tripling your speed.Dynamo: It's all about energy. Maximum collection, maximum power. You can Freeze the opponent for one turn. Unfortunately, Doubling anything is not always the best as you gain or lose double the energy.MultiTasker: Slow and steady. Handle everything perfectly. you move half the speed of any monster, but you gain additional 200 energy whether you gain or lose energy. On a full focus modes, you can move at normal speed for 2 turns.Schemer: Every setback is an opportunity. Every loss becomes a gain. you gain additional 10 energy on any gain or lose. if that doesn't satisfy you enough, you can steal from all the stationed monsters and the opponent.");
+        Button closeButton = new Button("Got it!");
+        closeButton.setOnAction( new EventHandler<ActionEvent>()
+        		{
+        		public void handle(ActionEvent e)
+        		{
+        			isExceptionActive=false;
+        			alertStage.close();
+        		}
+        
+        		});
+        
+        
+        monsterTypes.setWrapText(true);
+        monsterTypes.setEditable(false);
+        BorderPane pane = new BorderPane();
+        pane.setTop(label);
+        pane.setBottom(closeButton);
+        pane.setCenter(monsterTypes);
+
+        Scene scene = new Scene(pane, 500, 100);
+        alertStage.setScene(scene);
+        alertStage.show();
+    }}
+    
+    
   public void switchToWinScreen(KeyEvent e) throws IOException
    {
 	  sc.setStage(getStage());
@@ -573,21 +608,21 @@ public class Controller {
 	}
 	
 	
-	public void getJavaConsole(){
-		OutputStream os = new OutputStream(){
-			public void write(int arg0) throws IOException {
-				console.appendText(""+(char)arg0);
-				Platform.runLater(()->{
-					console.positionCaret(console.getText().length());
-					console.setScrollTop(Double.MAX_VALUE);
-				});
-			}
-			
-		};
-		System.setOut(new PrintStream(os,true));
-		System.setErr(new PrintStream(os,true));
-
-		
-	}
+//	public void getJavaConsole(){
+//		OutputStream os = new OutputStream(){
+//			public void write(int arg0) throws IOException {
+//				console.appendText(""+(char)arg0);
+//				Platform.runLater(()->{
+//					console.positionCaret(console.getText().length());
+//					console.setScrollTop(Double.MAX_VALUE);
+//				});
+//			}
+//			
+//		};
+//		System.setOut(new PrintStream(os,true));
+//		System.setErr(new PrintStream(os,true));
+//
+//		
+//	}
  
 }

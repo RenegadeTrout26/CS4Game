@@ -163,6 +163,7 @@
       <Button layoutX="1216.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainMenuButton" prefHeight="57.0" prefWidth="125.0" text="Main Menu" textAlignment="CENTER" textFill="#0f3bff" />
       <TextArea fx:id="console" layoutX="1407.0" layoutY="3.0" prefHeight="963.0" prefWidth="331.0" text="Game Start: &#10;1- Player 1's turn:" wrapText="true" />
       <Line endX="-19.0" endY="51.0" layoutX="1429.0" layoutY="911.0" startX="-19.0" startY="-911.0" />
-      <StackPane fx:id="cards" layoutX="618.0" layoutY="36.0" prefHeight="150.0" prefWidth="200.0" />
+      <StackPane fx:id="cards" layoutX="581.0" layoutY="36.0" prefHeight="150.0" prefWidth="200.0" />
+      <Button layoutX="14.0" layoutY="575.0" mnemonicParsing="false" onAction="#displayMonsterTypes" text="?" />
    </children>
 </AnchorPane>

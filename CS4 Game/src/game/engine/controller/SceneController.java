@@ -104,7 +104,7 @@ public class SceneController {
 	    scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
-
+	    
 	    controller.updatePlayerUI(game.getPlayer());
 	    controller.updateOppUI(game.getOpponent());
 	    controller.boardUI();

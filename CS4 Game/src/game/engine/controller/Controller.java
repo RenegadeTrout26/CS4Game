@@ -183,11 +183,11 @@ public class Controller {
 		private ImageView createSockImageView() {
 			String image = "ContaminationSock.jpeg";
 
-			ImageView sockImageView = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
-			sockImageView.setFitWidth(60);
-			sockImageView.setFitHeight(60);
-			sockImageView.setPreserveRatio(false);
-			return sockImageView;
+			ImageView sockImage = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
+			sockImage.setFitWidth(60);
+			sockImage.setFitHeight(60);
+			sockImage.setPreserveRatio(false);
+			return sockImage;
 		}
 
 
@@ -484,11 +484,11 @@ public class Controller {
 	private ImageView createCardBackView() {
 		String image = "CardBack.jpeg";
 
-		ImageView cardBackView = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
-		cardBackView.fitWidthProperty().bind(cards.widthProperty());
-		cardBackView.fitHeightProperty().bind(cards.heightProperty());
-		cardBackView.setPreserveRatio(false);
-		return cardBackView;
+		ImageView cardBack = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
+		cardBack.fitWidthProperty().bind(cards.widthProperty());
+		cardBack.fitHeightProperty().bind(cards.heightProperty());
+		cardBack.setPreserveRatio(false);
+		return cardBack;
 	}
 
 	public void drawCardUI()

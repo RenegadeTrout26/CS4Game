@@ -134,12 +134,13 @@ public class SceneController {
 	@FXML
 	public void handleCloseButton(ActionEvent event) 
 	{
-	 
+			
 	        Window window = closeButton.getScene().getWindow();
 	        if (window instanceof Stage) 
 	        {
 	            ((Stage) window).close(); 
 	        }
+	        
 	}
 	
 	public void updateGameOverScreen(String s)

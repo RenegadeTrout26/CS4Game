@@ -1,6 +1,8 @@
 package game.engine.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import game.engine.*;
 import game.engine.cards.Card;
@@ -12,6 +14,7 @@ import game.engine.cells.DoorCell;
 import game.engine.cells.MonsterCell;
 import game.engine.exceptions.*;
 import game.engine.monsters.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -567,6 +570,24 @@ public class Controller {
 	public void setStage( Stage s)
 	{
 		stage= s;
+	}
+	
+	
+	public void getJavaConsole(){
+		OutputStream os = new OutputStream(){
+			public void write(int arg0) throws IOException {
+				console.appendText(""+(char)arg0);
+				Platform.runLater(()->{
+					console.positionCaret(console.getText().length());
+					console.setScrollTop(Double.MAX_VALUE);
+				});
+			}
+			
+		};
+		System.setOut(new PrintStream(os,true));
+		System.setErr(new PrintStream(os,true));
+
+		
 	}
  
 }

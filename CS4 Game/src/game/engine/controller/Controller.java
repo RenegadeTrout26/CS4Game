@@ -443,15 +443,26 @@ public class Controller {
 	
 	public void initializeCardsUI()
 	{
+		cards.getChildren().clear();
 		Label l = new Label("25");
 		for (int i = 0; i < 25; i++) {
-			Rectangle r = new Rectangle(90,150,Color.AQUA);
-			r.setStroke(Color.BLACK);
-			r.setTranslateX(-i+0.5);
-			cards.getChildren().add(r);
+			ImageView cardBack = createCardBackView();
+			
+			cards.getChildren().add(cardBack);
 		}
 		cards.getChildren().add(l);
 	}
+
+	private ImageView createCardBackView() {
+		String image = "CardBack.jpeg";
+
+		ImageView cardBackView = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
+		cardBackView.fitWidthProperty().bind(cards.widthProperty());
+		cardBackView.fitHeightProperty().bind(cards.heightProperty());
+		cardBackView.setPreserveRatio(false);
+		return cardBackView;
+	}
+
 	public void drawCardUI()
 	{
 		if(cards.getChildren().size()!=2)

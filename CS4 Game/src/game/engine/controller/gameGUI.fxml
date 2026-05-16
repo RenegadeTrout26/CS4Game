@@ -140,6 +140,8 @@
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="6" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="7" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+            <ImageView fx:id="opponent" fitHeight="52.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9" />
+            <ImageView fx:id="player" fitHeight="58.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <TextArea fx:id="playerTxt" layoutX="14.0" layoutY="270.0" prefHeight="305.0" prefWidth="323.0" />
@@ -161,7 +163,5 @@
       </ImageView>
       <ProgressBar fx:id="playerEnergy" layoutX="67.0" layoutY="179.0" prefHeight="11.0" prefWidth="60.0" progress="0.0" rotate="270.0" />
       <ProgressBar fx:id="oppEnergy" layoutX="1176.0" layoutY="473.0" prefHeight="15.0" prefWidth="46.0" progress="0.0" rotate="270.0" />
-      <ImageView fx:id="opponent" fitHeight="52.0" fitWidth="40.0" layoutX="78.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="player" fitHeight="58.0" fitWidth="40.0" layoutX="136.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

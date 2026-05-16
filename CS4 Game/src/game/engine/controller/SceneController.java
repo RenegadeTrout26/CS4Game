@@ -109,6 +109,7 @@ public class SceneController {
 	    controller.updateOppUI(game.getOpponent());
 	    controller.boardUI();
 	    controller.initializeCardsUI();
+	    controller.initializeMonsterImages();
 	   
     scene.setOnKeyPressed( new EventHandler<KeyEvent>(){
 

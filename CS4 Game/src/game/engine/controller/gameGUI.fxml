@@ -10,9 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane prefHeight="962.0" prefWidth="1458.0" translateX="-10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
    <children>
@@ -142,8 +140,8 @@
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="6" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="7" GridPane.rowIndex="9" />
             <ImageView fitHeight="47.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-            <Circle fx:id="opponent" fill="#e51fff45" radius="23.0" smooth="false" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.2" GridPane.rowIndex="9" />
-            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#1fff8bb5" height="35.0" stroke="BLACK" strokeType="INSIDE" width="28.0" GridPane.rowIndex="9" />
+            <ImageView fx:id="opponent" fitHeight="52.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9" />
+            <ImageView fx:id="player" fitHeight="58.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <TextArea fx:id="playerTxt" layoutX="14.0" layoutY="270.0" prefHeight="305.0" prefWidth="323.0" />

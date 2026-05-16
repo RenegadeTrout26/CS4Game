@@ -207,6 +207,7 @@ public class Controller {
 			moveUI(curr);
 			
 			
+			updateIcons();
 			if(game.getWinner()!=null)
 				getWinText(l);
 			if(curr==game.getPlayer())
@@ -225,6 +226,8 @@ public class Controller {
 			
 		}
 	}
+
+
 	public void resetPos(int pos, Monster curr)
 	{
 		Shape s;
@@ -283,23 +286,7 @@ public class Controller {
 	{
 		Controller.roll=rol;
 	}
-//	public void updateMonsterCells(int i)
-//	{
-//		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
-//		StackPane sp = cells[i];
-//		sp.getChildren().removeAll();
-//		Label l2;
-//		Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
-//		l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
-//		if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
-//		l2.setTextFill(Color.BLUE);
-//		else
-//			l2.setTextFill(Color.INDIANRED);
-//		
-//		Label l = new Label(i + " ");
-//		l.setTranslateX(-17); l.setTranslateY(-20);
-//		sp.getChildren().addAll(r, l,l2);
-//	}
+
 	public void updateMonsterCells()
 	{
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
@@ -414,6 +401,7 @@ public class Controller {
 	{
 
 		console.appendText(s);
+		console.positionCaret(console.getText().length());
 		
 	}
 	public void updateConsole2()
@@ -656,23 +644,30 @@ public class Controller {
 		
 	}
 	
+	public void updateIcons()
+	{
+		initializePlayerIcon(game.getPlayer().getRole());
+		initializeOppIcon(game.getOpponent().getRole());
+	}
 	
-//	public void getJavaConsole(){
-//		OutputStream os = new OutputStream(){
-//			public void write(int arg0) throws IOException {
-//				console.appendText(""+(char)arg0);
-//				Platform.runLater(()->{
-//					console.positionCaret(console.getText().length());
-//					console.setScrollTop(Double.MAX_VALUE);
-//				});
-//			}
-//			
-//		};
-//		System.setOut(new PrintStream(os,true));
-//		System.setErr(new PrintStream(os,true));
-//
-//		
-//	}
+	public void getJavaConsole(){
+		OutputStream os = new OutputStream(){
+			public void write(int arg0) throws IOException {
+				console.appendText(""+(char)arg0);
+				Platform.runLater(()->{
+					console.positionCaret(console.getText().length());
+					console.setScrollTop(Double.MAX_VALUE);
+				});
+			}
+			
+		};
+		System.setOut(new PrintStream(os,true));
+		System.setErr(new PrintStream(os,true));
+
+		
+	}
+	
+	
  
 	
 }

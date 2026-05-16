@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="962.0" prefWidth="1458.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
+<AnchorPane prefHeight="962.0" prefWidth="1458.0" translateX="-10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
    <children>
       <Button layoutX="352.0" layoutY="882.0" mnemonicParsing="false" onAction="#rollUI" prefHeight="57.0" prefWidth="125.0" text="Roll" textAlignment="CENTER" textFill="#ff0e0e" />
       <Button layoutX="866.0" layoutY="882.0" mnemonicParsing="false" onAction="#usePowerUpUI" prefHeight="57.0" prefWidth="125.0" text="Use PowerUp" textAlignment="CENTER" textFill="#00f435" />

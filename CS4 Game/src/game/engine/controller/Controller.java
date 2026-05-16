@@ -15,12 +15,15 @@ import game.engine.monsters.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -31,14 +34,13 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 public class Controller {
-
+	
+	
+	
 	private boolean isExceptionActive;
 	private Game game;
 	public static String tempWord;
-	@FXML
-	private Rectangle player;
-	@FXML
-	private Circle opponent;
+
 	
 	private SceneController sc = new SceneController();
 
@@ -58,6 +60,10 @@ public class Controller {
 	@FXML
 	private TextArea oppTxt;
 
+	@FXML
+	private Rectangle player;
+	@FXML
+	private Circle opponent;
 	@FXML
 	private GridPane boardGrid;
 
@@ -422,20 +428,29 @@ public class Controller {
 	
 	public void initializeCardsUI()
 	{
+		Label l = new Label("25");
 		for (int i = 0; i < 25; i++) {
 			Rectangle r = new Rectangle(90,150,Color.AQUA);
 			r.setStroke(Color.BLACK);
 			r.setTranslateX(-i+0.5);
 			cards.getChildren().add(r);
 		}
+		cards.getChildren().add(l);
 	}
 	public void drawCardUI()
 	{
-		if(cards.getChildren().size()!=1)
-		cards.getChildren().remove(cards.getChildren().size()-1);
+		if(cards.getChildren().size()!=2)
+		{ Label l = (Label)cards.getChildren().remove(cards.getChildren().size()-1);
+		String s = l.getText();
+		s= ""+ (Integer.parseInt(s)-1);
+			cards.getChildren().remove(cards.getChildren().size()-1);
+			l.setText(s);
+			cards.getChildren().add(l);
+		}
 		else
 			
 			{
+			cards.getChildren().remove(1);
 			initializeCardsUI();
 			drawCardUI();
 			}
@@ -489,11 +504,12 @@ public class Controller {
         
         		});
 
+        //Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
         BorderPane pane = new BorderPane();
         pane.setTop(label);
         pane.setCenter(closeButton);
 
-        Scene scene = new Scene(pane, 500, 100);
+        Scene scene = new Scene(pane,500,100);
         alertStage.setScene(scene);
         alertStage.show();
     }
@@ -522,4 +538,10 @@ public class Controller {
         alertStage.setScene(scene);
         alertStage.show();
     }
+    
+//    public void switchToWinScreen(KeyEvent e)
+//    {
+//    	if(e.KEY_PRESSED.equals(arg0))
+//    }
+ 
 }

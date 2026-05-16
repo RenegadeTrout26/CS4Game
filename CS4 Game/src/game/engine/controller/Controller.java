@@ -489,7 +489,10 @@ public class Controller {
 	
 	
     private void displayInvalidMoveException(String title, String message) {
-        Stage alertStage = new Stage();
+    	if(!isExceptionActive)
+    	{
+    		isExceptionActive=true;
+    	Stage alertStage = new Stage();
         alertStage.setTitle(title);
 
         Label label = new Label(message);
@@ -512,9 +515,11 @@ public class Controller {
         Scene scene = new Scene(pane,500,100);
         alertStage.setScene(scene);
         alertStage.show();
-    }
+    }}
     private void displayNotEnoughEnergyException(String title, String message) {
-        isExceptionActive=true;
+        if(!isExceptionActive)
+        {
+    	isExceptionActive=true;
     	Stage alertStage = new Stage();
         alertStage.setTitle(title);
 
@@ -537,7 +542,7 @@ public class Controller {
         Scene scene = new Scene(pane, 500, 100);
         alertStage.setScene(scene);
         alertStage.show();
-    }
+    }}
     
 //    public void switchToWinScreen(KeyEvent e)
 //    {

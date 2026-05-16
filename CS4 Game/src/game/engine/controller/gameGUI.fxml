@@ -165,5 +165,15 @@
       <Line endX="-19.0" endY="51.0" layoutX="1429.0" layoutY="911.0" startX="-19.0" startY="-911.0" />
       <StackPane fx:id="cards" layoutX="581.0" layoutY="36.0" prefHeight="150.0" prefWidth="200.0" />
       <Button layoutX="14.0" layoutY="575.0" mnemonicParsing="false" onAction="#displayMonsterTypes" text="?" />
+      <ImageView fx:id="player1" fitHeight="100.0" fitWidth="46.0" layoutX="130.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Player.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="player2" fitHeight="121.0" fitWidth="46.0" layoutX="1216.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Opponent.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

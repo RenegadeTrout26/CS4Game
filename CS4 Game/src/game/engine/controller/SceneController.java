@@ -9,6 +9,7 @@ import java.util.EventObject;
 import javafx.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -70,6 +71,23 @@ public class SceneController {
 			g.setText(p.toString());
 			g.setEditable(false);
 	}
+	public void switchToGameOver(KeyEvent event, String s) throws IOException
+	{
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+	    Parent root = loader.load();
+	    SceneController controller = loader.getController();
+	   
+	  
+	    stage = getStage();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+		 TextArea g = controller.getGameOverMSG();
+			StringBuilder p = new StringBuilder();
+			p.append(s);
+			g.setText(p.toString());
+			g.setEditable(false);
+	}
 	
 	public TextArea getGameOverMSG() {
 		return GameOverMSG;
@@ -91,11 +109,27 @@ public class SceneController {
 	    controller.updateOppUI(game.getOpponent());
 	    controller.boardUI();
 	    controller.initializeCardsUI();
-//	    scene.setOnKeyPressed(
-//	            ->(KeyEvent event)
-//	            {
-//	            	
-//	            });
+    scene.setOnKeyPressed( new EventHandler<KeyEvent>(){
+
+		@Override
+		public void handle(KeyEvent event){
+			switch(event.getCode())
+			{
+			case W: try {
+					controller.switchToWinScreen(event);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}break;
+			case E: controller.addEnergy();break;
+			default:
+				break;
+			}
+			
+		}
+    	
+    });
+    controller.setStage(stage);
+
 	}
 	@FXML
 	public void handleCloseButton(ActionEvent event) 
@@ -117,7 +151,15 @@ public class SceneController {
 		GameOverMSG.setEditable(false);
 	}
 	
-	
+	public void setStage(Stage s)
+	{
+		stage= s;
+		
+	}
+	public Stage getStage()
+	{
+		return stage;
+	}
 
 }
 

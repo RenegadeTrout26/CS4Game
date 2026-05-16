@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 
 public class Controller {
 	
-	
+	private Stage stage;
 	
 	private boolean isExceptionActive;
 	private Game game;
@@ -544,9 +544,29 @@ public class Controller {
         alertStage.show();
     }}
     
-//    public void switchToWinScreen(KeyEvent e)
-//    {
-//    	if(e.KEY_PRESSED.equals(arg0))
-//    }
+  public void switchToWinScreen(KeyEvent e) throws IOException
+   {
+	  sc.setStage(getStage());
+  	if(game.getPlayer().getEnergy()>= game.getOpponent().getEnergy())
+	sc.switchToGameOver(e,"YOU WON!"+ "\nPlayer Energy: " + game.getPlayer().getEnergy()+ "\nOpponent Energy: "+ game.getOpponent().getEnergy());
+  	else
+	sc.switchToGameOver(e,"YOU LOSE!"+ "\nPlayer Energy: " + game.getPlayer().getEnergy()+ "\nOpponent Energy: "+ game.getOpponent().getEnergy());
+   }
+    
+    public void addEnergy()
+    {
+    	game.getCurrent().setEnergy(game.getCurrent().getEnergy()+100);
+    	updateOppUI(game.getOpponent()); 
+		updatePlayerUI(game.getPlayer());
+    }
+
+	public Stage getStage() {
+		
+		return stage;
+	}
+	public void setStage( Stage s)
+	{
+		stage= s;
+	}
  
 }

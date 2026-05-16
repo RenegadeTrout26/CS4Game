@@ -5,19 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.SceneController">
    <children>
-      <Label layoutX="308.0" layoutY="92.0" prefHeight="81.0" prefWidth="265.0" text="DoorDash" textAlignment="CENTER">
+      <Label layoutX="377.0" layoutY="117.0" prefHeight="81.0" prefWidth="265.0" text="DoorDash" textAlignment="CENTER">
          <font>
             <Font size="55.0" />
          </font>
       </Label>
-      <Button layoutX="347.0" layoutY="373.0" mnemonicParsing="false" onAction="#switchToGameInstructions" prefHeight="81.0" prefWidth="169.0" text="Start" textFill="#04c90e">
+      <Button layoutX="425.0" layoutY="564.0" mnemonicParsing="false" onAction="#switchToGameInstructions" prefHeight="81.0" prefWidth="169.0" text="Start" textFill="#04c90e">
          <font>
             <Font size="31.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="347.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="81.0" prefWidth="169.0" text="Quit" textFill="#f60000">
+      <Button fx:id="closeButton" layoutX="425.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="81.0" prefWidth="169.0" text="Quit" textFill="#f60000">
          <font>
             <Font size="31.0" />
          </font>

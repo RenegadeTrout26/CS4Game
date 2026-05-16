@@ -66,11 +66,18 @@ public class Controller {
 
 	@FXML
 	private TextArea oppTxt;
+	@FXML
+	private ImageView player;
+	
+	@FXML
+	private ImageView opponent;
 
 	@FXML
-	private Rectangle player;
+	private ImageView player1;
+
 	@FXML
-	private Circle opponent;
+	private ImageView player2;
+	
 	@FXML
 	private GridPane boardGrid;
 
@@ -156,7 +163,6 @@ public class Controller {
 		
 	}
 
-	@FXML
 	public void chooseScarer(ActionEvent e) throws IOException {
 		game = new Game(Role.SCARER);
 		sc.switchToGame(e, game);
@@ -182,7 +188,6 @@ public class Controller {
 		 initializePlayerIcon(Role.LAUGHER);
 		 initializeOppIcon(Role.SCARER);
 	}
-
 	@FXML
 	public void rollUI(ActionEvent l) throws InvalidMoveException, IOException {
 		try {
@@ -227,7 +232,7 @@ public class Controller {
 	}
 	public void resetPos(int pos, Monster curr)
 	{
-		Shape s;
+		ImageView s;
 		if(curr.equals(game.getPlayer()))
 		{
 			s = player;
@@ -240,7 +245,7 @@ public class Controller {
 	
 	public  void clearOldPos(int ogPos,Monster curr)
 	{
-		Shape s;
+		ImageView s;
 		if(curr.equals(game.getPlayer()))
 		{
 			s = player;
@@ -252,7 +257,7 @@ public class Controller {
 	}
 	public void moveUI(Monster curr) throws IOException
 	{
-		Shape s;
+		ImageView s;
 		if(curr.equals(game.getPlayer()))
 		{
 			s = player;
@@ -600,16 +605,27 @@ public class Controller {
 		this.isExceptionActive = isExceptionActive;
 	}
 
+	public void initializeMonsterImages() {
+		initializePlayerIcon(game.getPlayer().getOriginalRole());
+		initializeOppIcon(game.getOpponent().getOriginalRole());
+	}
+
 	public void initializePlayerIcon(Role role) {
+		String theImage = null;
 		if(role.equals(Role.SCARER))
 		{
 			switch(game.getPlayer().getName())
 			{
-			case "James P. Sullivan":break;
-			case"Randall Boggs":break;
-			case "Roz": break;
-			case "Henry J. Waternoose": break;
-			default: break;
+			case "James P. Sullivan": theImage = "SullivanPlayer.jpeg";
+				break;
+			case"Randall Boggs": theImage = "Randall.jpeg";
+				break;
+			case "Roz": theImage = "Roz.jpeg";
+				break;
+			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
+				break;
+			default: theImage = "SullivanPlayer.jpeg";
+				break;
 				
 			}
 		}
@@ -617,27 +633,40 @@ public class Controller {
 		{
 			switch(game.getPlayer().getName())
 			{
-			case "Mike Wazowski":break;
-			case"Celia Mae":break;
-			case "Fungus": break;
-			case "Yeti": break;
-			default: break;
-				
+			case "Mike Wazowski": theImage = "Wazowski.jpeg";
+				break;
+			case"Celia Mae": theImage = "Celia.jpeg";
+				break;
+			case "Fungus": theImage = "Fungus.jpeg";
+				break;
+			case "Yeti": theImage = "Yeti.jpeg";
+				break;
+			default: theImage = "Wazowski.jpeg";
+				break;
 			}
 		}
+		Image playerImage = new Image(getClass().getResource(theImage).toExternalForm());
+		player.setImage(playerImage);
+				
 		
 	}
 
 	public void initializeOppIcon(Role role) {
+		String theImage = null;
 		if(role.equals(Role.SCARER))
 		{
 			switch(game.getOpponent().getName())
 			{
-			case "James P. Sullivan":break;
-			case"Randall Boggs":break;
-			case "Roz": break;
-			case "Henry J. Waternoose": break;
-			default: break;
+			case "James P. Sullivan": theImage = "Sullivan.jpeg";
+				break;
+			case"Randall Boggs": theImage = "RandallOpp.jpeg";
+				break;
+			case "Roz": theImage = "RozOpp.jpeg";
+				break;
+			case "Henry J. Waternoose": theImage = "WaternooseOpp.jpeg";
+				break;
+			default:theImage = "Sullivan.jpeg";
+				break;
 				
 			}
 		}
@@ -645,14 +674,22 @@ public class Controller {
 		{
 			switch(game.getOpponent().getName())
 			{
-			case "Mike Wazowski":break;
-			case"Celia Mae":break;
-			case "Fungus": break;
-			case "Yeti": break;
-			default: break;
+			case "Mike Wazowski": theImage = "WazowskiOpp.jpeg";
+				break;
+			case"Celia Mae": theImage = "CeliaOpp.jpeg";
+				break;
+			case "Fungus": theImage ="FungusOpp.jpeg";
+				break;
+			case "Yeti": theImage = "YetiOpp.jpeg";
+				break;
+			default: theImage = "WazowskiOpp.jpeg";
+				break;
 				
 			}
 		}
+		Image oppImage = new Image(getClass().getResource(theImage).toExternalForm());
+		opponent.setImage(oppImage);
+		
 		
 	}
 	

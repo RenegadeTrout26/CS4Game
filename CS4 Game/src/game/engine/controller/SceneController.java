@@ -109,6 +109,7 @@ public class SceneController {
 	    controller.updateOppUI(game.getOpponent());
 	    controller.boardUI();
 	    controller.initializeCardsUI();
+	   
     scene.setOnKeyPressed( new EventHandler<KeyEvent>(){
 
 		@Override

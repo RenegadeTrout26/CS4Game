@@ -162,7 +162,8 @@ public class Controller {
 		sc.switchToGame(e, game);
 		setGame(game);
 		System.out.println("Your Monster is: " + game.getPlayer().getName());
-
+		 initializePlayerIcon(Role.SCARER);
+		 initializeOppIcon(Role.LAUGHER);
 	}
 
 	public Game getGame() {
@@ -178,6 +179,8 @@ public class Controller {
 		sc.switchToGame(e, game);
 		setGame(game);
 		System.out.println("Your Monster is: " + game.getPlayer().getName());
+		 initializePlayerIcon(Role.LAUGHER);
+		 initializeOppIcon(Role.SCARER);
 	}
 
 	@FXML
@@ -595,6 +598,62 @@ public class Controller {
 
 	public void setExceptionActive(boolean isExceptionActive) {
 		this.isExceptionActive = isExceptionActive;
+	}
+
+	public void initializePlayerIcon(Role role) {
+		if(role.equals(Role.SCARER))
+		{
+			switch(game.getPlayer().getName())
+			{
+			case "James P. Sullivan":break;
+			case"Randall Boggs":break;
+			case "Roz": break;
+			case "Henry J. Waternoose": break;
+			default: break;
+				
+			}
+		}
+		else
+		{
+			switch(game.getPlayer().getName())
+			{
+			case "Mike Wazowski":break;
+			case"Celia Mae":break;
+			case "Fungus": break;
+			case "Yeti": break;
+			default: break;
+				
+			}
+		}
+		
+	}
+
+	public void initializeOppIcon(Role role) {
+		if(role.equals(Role.SCARER))
+		{
+			switch(game.getOpponent().getName())
+			{
+			case "James P. Sullivan":break;
+			case"Randall Boggs":break;
+			case "Roz": break;
+			case "Henry J. Waternoose": break;
+			default: break;
+				
+			}
+		}
+		else
+		{
+			switch(game.getOpponent().getName())
+			{
+			case "Mike Wazowski":break;
+			case"Celia Mae":break;
+			case "Fungus": break;
+			case "Yeti": break;
+			default: break;
+				
+			}
+		}
+		
 	}
 	
 	

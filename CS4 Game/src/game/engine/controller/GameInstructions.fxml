@@ -21,7 +21,10 @@
          <font>
             <Font size="16.0" />
          </font></TextArea>
-      <Button layoutX="1074.0" layoutY="837.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="Done" />
+      <Button layoutX="1074.0" layoutY="837.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="Done">
+         <font>
+            <Font name="System Bold Italic" size="23.0" />
+         </font></Button>
       <ImageView fitHeight="478.0" fitWidth="198.0" layoutX="1028.0" layoutY="212.0">
          <image>
             <Image url="@Legend" />

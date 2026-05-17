@@ -20,15 +20,15 @@ public class GUI extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("DoorDash");
 		Parent root1 = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
-		//Image icon = new Image("/CS4 Game/src/game/engine/controller/Icon.jpg");
+		Image icon = new Image(getClass().getResource("Icon.jpg").toExternalForm());
 		
 
 		Scene s = new Scene(root1);
 		primaryStage.setScene(s);
-		//primaryStage.getIcons().add(icon);
+		primaryStage.getIcons().add(icon);
 		primaryStage.show();
 		
-		
+		//primaryStage.setResizable(false);
 	}
 	
 

@@ -44,7 +44,8 @@ public class Controller {
 	private boolean isExceptionActive;
 	private Game game;
 	public static String tempWord;
-
+	
+	private ImageView monsterCellImage;
 	
 	private SceneController sc = new SceneController();
 
@@ -57,6 +58,7 @@ public class Controller {
 
 	@FXML
 	private ProgressBar playerEnergy;
+
 	
 	
 	@FXML
@@ -85,7 +87,10 @@ public class Controller {
 	private StackPane cards ;
 	@FXML
 	private StackPane cardsDrawn;
+
+	private ImageView doorCellImage;
 	private static Card Currcard;
+	
 	
 	public static int  roll;
 
@@ -126,6 +131,7 @@ public class Controller {
 	private StackPane createCell(int i) {
 		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
 		Rectangle r;
+		 monsterCellImage= new ImageView();
 		Label l2 = new Label("");
 		if (c instanceof ConveyorBelt)
 			r = new Rectangle(60, 60, Color.GREEN);
@@ -136,10 +142,11 @@ public class Controller {
 
 		else if (c instanceof MonsterCell)
 		{
+			monsterCellImage = new ImageView( new Image(setMonsterCellIcon(((MonsterCell)c).getCellMonster())));
 			r = new Rectangle(60, 60, Color.LIGHTBLUE);	
 			l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
 			if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
-			l2.setTextFill(Color.BLUE);
+			l2.setTextFill(Color.WHITE);
 			else
 				l2.setTextFill(Color.INDIANRED);
 		}
@@ -156,9 +163,12 @@ public class Controller {
 		Label l = new Label(i + " ");
 		l.setTranslateX(-17); l.setTranslateY(-20);
 		StackPane sp = new StackPane();
-		if(c instanceof DoorCell || c instanceof MonsterCell)
-			sp.getChildren().addAll(r, l,l2);
+		if(c instanceof DoorCell ) 
+			sp.getChildren().addAll(doorCellImage, l,l2);
 		else
+			if(c instanceof MonsterCell)
+				sp.getChildren().addAll(monsterCellImage, l,l2);
+			else
 			sp.getChildren().addAll(r, l);
 		return sp;
 		
@@ -335,18 +345,16 @@ public class Controller {
 			if(c instanceof MonsterCell)
 			{
 				StackPane sp = cells[i];
-				sp.getChildren().removeAll();
-				Label l2;
-				Rectangle r = new Rectangle(60, 60, Color.LIGHTBLUE);	
+				
+				Label l2= (Label)sp.getChildren().remove(sp.getChildren().size()-1);
+			
 				l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
 				if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
 				l2.setTextFill(Color.BLUE);
 				else
 					l2.setTextFill(Color.INDIANRED);
-				
-				Label l = new Label(i + " ");
-				l.setTranslateX(-17); l.setTranslateY(-20);
-				sp.getChildren().addAll(r, l,l2);
+			
+				sp.getChildren().addAll(l2);
 			}
 		}
 	}
@@ -833,6 +841,44 @@ System.out.println(s);
 		
 	}
 	
+	private String setMonsterCellIcon(Monster m)
+	{
+		String theImage = null;
+		if(m.getRole().equals(Role.SCARER))
+		{
+			switch(game.getPlayer().getName())
+			{
+			case "James P. Sullivan": theImage = "SullivanPlayer.jpeg";
+				break;
+			case"Randall Boggs": theImage = "Randall.jpeg";
+				break;
+			case "Roz": theImage = "Roz.jpeg";
+				break;
+			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
+				break;
+			default: theImage = "SullivanPlayer.jpeg";
+				break;
+				
+			}
+		}
+		else
+		{
+			switch(game.getPlayer().getName())
+			{
+			case "Mike Wazowski": theImage = "Wazowski.jpeg";
+				break;
+			case"Celia Mae": theImage = "Celia.jpeg";
+				break;
+			case "Fungus": theImage = "Fungus.jpeg";
+				break;
+			case "Yeti": theImage = "Yeti.jpeg";
+				break;
+			default: theImage = "Wazowski.jpeg";
+				break;
+			}
+		}
+		return theImage;
+	}
 	
  
 	

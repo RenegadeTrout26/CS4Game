@@ -16,7 +16,7 @@
 <AnchorPane prefHeight="962.0" prefWidth="1458.0" translateX="-10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.Controller">
    <children>
       <Button layoutX="436.0" layoutY="882.0" mnemonicParsing="false" onAction="#rollUI" prefHeight="57.0" prefWidth="125.0" text="Roll" textAlignment="CENTER" textFill="#ff0e0e" />
-      <Button layoutX="815.0" layoutY="882.0" mnemonicParsing="false" onAction="#usePowerUpUI" prefHeight="57.0" prefWidth="125.0" text="Use PowerUp" textAlignment="CENTER" textFill="#00f435" />
+      <Button layoutX="795.0" layoutY="882.0" mnemonicParsing="false" onAction="#usePowerUpUI" prefHeight="57.0" prefWidth="145.0" text="Use PowerUp" textAlignment="CENTER" textFill="#00f435" />
       <GridPane fx:id="boardGrid" alignment="CENTER" gridLinesVisible="true" layoutX="369.0" layoutY="209.0" prefHeight="588.0" prefWidth="623.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.3333536783854" minWidth="10.0" prefWidth="143.33331298828125" />

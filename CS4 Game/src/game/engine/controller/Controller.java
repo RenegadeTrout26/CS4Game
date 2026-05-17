@@ -699,6 +699,8 @@ public class Controller {
 				break;
 			case "Henry J. Waternoose": theImage = "WaternooseOpp.jpeg";
 				break;
+			default : theImage ="Sullivan.jpeg";
+			 break;
 		
 			}
 		}
@@ -715,6 +717,8 @@ public class Controller {
 				break;
 			case "Yeti": theImage = "Yeti.jpeg";
 				break;
+			default : theImage ="Wazowski.jpeg";
+			 break;
 			
 		
 			}
@@ -739,6 +743,8 @@ public class Controller {
 				break;
 			case "Henry J. Waternoose": theImage = "WaternooseOpp.jpeg";
 				break;
+			default : theImage ="Sullivan.jpeg";
+			 break;
 		
 			}
 		}
@@ -755,7 +761,8 @@ public class Controller {
 				break;
 			case "Yeti": theImage = "Yeti.jpeg";
 				break;
-		
+			default : theImage ="Wazowski.jpeg";
+			 break;
 		
 			}
 		}
@@ -789,19 +796,21 @@ public class Controller {
 		
 	}
 	private void confusedMonsterImage(Monster monster) {
-		String theImage = null;
+		String Image = null;
 		if(monster.getRole().equals(Role.SCARER))
 		{
 			switch(monster.getName())
 			{
-			case "James P. Sullivan": theImage = "SullivanPlayer.jpeg";
+			case "James P. Sullivan": Image = "SullivanPlayer.jpeg";
 				break;
-			case"Randall Boggs": theImage = "Randall.jpeg";
+			case"Randall Boggs": Image = "Randall.jpeg";
 				break;
-			case "Roz": theImage = "Roz.jpeg";
+			case "Roz": Image = "Roz.jpeg";
 				break;
-			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
+			case "Henry J. Waternoose": Image = "Waternoose.jpeg";
 				break;
+			default : Image ="SullivanPlayer.jpeg";
+			 break;
 			}
 				
 		}
@@ -809,17 +818,19 @@ public class Controller {
 		{	
 			switch(monster.getName())
 			{
-			case "Mike Wazowski": theImage = "WazowskiOpp.jpeg";
+			case "Mike Wazowski": Image = "WazowskiOpp.jpeg";
 				break;
-			case"Celia Mae": theImage = "CeliaOpp.jpeg";
+			case"Celia Mae": Image = "CeliaOpp.jpeg";
 				break;
-			case "Fungus": theImage ="FungusOpp.jpeg";
+			case "Fungus": Image ="FungusOpp.jpeg";
 				break;
-			case "Yeti": theImage = "YetiOpp.jpeg";
+			case "Yeti": Image = "YetiOpp.jpeg";
 				break;
+			 default : Image ="WazowskiOpp.jpeg";
+			 break;
 			}
 			}
-		Image monsterImage = new Image(getClass().getResource(theImage).toExternalForm());
+		Image monsterImage = new Image(getClass().getResource(Image).toExternalForm());
 		if(monster.equals(game.getPlayer()))
 			player.setImage(monsterImage);
 		else

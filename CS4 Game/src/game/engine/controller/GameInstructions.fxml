@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -25,11 +26,23 @@
       <TextArea editable="false" layoutX="63.0" layoutY="135.0" prefHeight="769.0" prefWidth="926.0" text="Turn Sequence&#10;Each turn follows a strict sequence representing one complete action on the Floor:&#10;1. Powerup Phase (Optional):&#10;○ Current player may choose to activate their powerup if they have enough energy (500 energy cost)&#10;2. Dice Roll:&#10;○ Roll a standard 6-sided dice (1-6)&#10;○ The number rolled indicates the number of cells the player will move forward&#10;3. Movement Attempt:&#10;○ Player attempts to move to the new cell based on dice roll&#10;○ Occupied Cell Check: If the final destination cell (after card/transport cells) is occupied by the opponent, the move is invalid&#10;■ Player remains at their current position&#10;■ Player must roll again (retry the turn)&#10;4. Cell Action:&#10;○ If the move is valid (cell not occupied), the player lands on the new cell&#10;○ The landed cell's special effect activates&#10;○ Cell effects may modify position, energy, or other game states&#10;5. Board Update:&#10;○ Board is updated with the new monster positions&#10;○ All game state changes are finalized&#10;6. Turn Switch:&#10;○ If the win condition is not met, turn passes to the other player&#10;○ If the win condition is met, the game ends&#10;&#10;Win Condition&#10;● A player wins when ALL of the following are true:&#10;○ Player's position is exactly at cell 99 (Boo's Door - the final cell)&#10;○ Player has ≥ 1000 energy in their canister&#10;● If win condition is not met:&#10;○ The game continues with the next player's turn&#10;○ Players loop through turns until someone achieves both victory requirements" wrapText="true">
          <font>
             <Font size="16.0" />
-         </font></TextArea>
-      <Button layoutX="1074.0" layoutY="837.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="Done">
-         <font>
-            <Font name="System Bold Italic" size="23.0" />
-         </font></Button>
+         </font>
+      </TextArea>
+
+      <!-- Done Button with image -->
+      <Button layoutX="1074.0" layoutY="837.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="">
+         <graphic>
+            <ImageView fitWidth="105" fitHeight="64" preserveRatio="false" pickOnBounds="true">
+               <image>
+                  <Image url="@doneButton.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets />
+         </padding>
+      </Button>
+
       <ImageView fitHeight="478.0" fitWidth="198.0" layoutX="1028.0" layoutY="212.0">
          <image>
             <Image url="@Legend" />
@@ -59,6 +72,11 @@
       <ImageView fitHeight="26.0" fitWidth="16.0" layoutX="1190.0" layoutY="416.0">
          <image>
             <Image url="@CardBack.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="1181.0" layoutY="343.0">
+         <image>
+            <Image url="@Wazowski.jpeg" />
          </image>
       </ImageView>
    </children>

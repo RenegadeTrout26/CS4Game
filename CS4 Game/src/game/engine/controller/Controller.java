@@ -110,8 +110,9 @@ public class Controller {
     private StackPane createCell(int i) {
         Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
         Rectangle r;
-        ImageView monsterCellImage = new ImageView(); // local
-        ImageView doorCellImage    = new ImageView(); // local
+        ImageView monsterCellImage = new ImageView(); 
+        ImageView doorCellImage    = new ImageView(); 
+        ImageView cardCellImage= new ImageView();
         Label l2 = new Label("");
 
         if (c instanceof ConveyorBelt) {
@@ -122,7 +123,11 @@ public class Controller {
 
         } else if (c instanceof CardCell) {
             r = new Rectangle(60, 60, Color.DARKRED);
-
+             cardCellImage = new ImageView(getCachedImage("CardBack.jpeg"));
+            cardCellImage.setFitWidth(20);
+            cardCellImage.setFitHeight(30);
+            cardCellImage.setPreserveRatio(false);
+            
         } else if (c instanceof MonsterCell) {
             monsterCellImage = new ImageView(
                 getCachedImage(setMonsterCellIcon(((MonsterCell) c).getCellMonster())));
@@ -161,7 +166,7 @@ public class Controller {
         else if (c instanceof MonsterCell)
             sp.getChildren().addAll(r,monsterCellImage, l, l2);
         else if (c instanceof CardCell)
-            sp.getChildren().addAll(r, l);
+            sp.getChildren().addAll(r,cardCellImage, l);
         else
             sp.getChildren().addAll(r, l);
 

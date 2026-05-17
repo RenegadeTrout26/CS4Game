@@ -691,22 +691,23 @@ System.out.println(s);
 		{
 			switch(game.getPlayer().getName())
 			{
-			case "James P. Sullivan": theImage = "SullivanPlayer.jpeg";
+			case "James P. Sullivan": theImage = "Sullivan.jpeg";
 				break;
-			case"Randall Boggs": theImage = "Randall.jpeg";
+			case"Randall Boggs": theImage = "RandallOpp.jpeg";
 				break;
-			case "Roz": theImage = "Roz.jpeg";
+			case "Roz": theImage = "RozOpp.jpeg";
 				break;
-			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
+			case "Henry J. Waternoose": theImage = "WaternooseOpp.jpeg";
 				break;
-			default: theImage = "SullivanPlayer.jpeg";
-				break;
-				
+			default : theImage ="Sullivan.jpeg";
+			 break;
+		
 			}
 		}
 		else
 		{
 			switch(game.getPlayer().getName())
+		
 			{
 			case "Mike Wazowski": theImage = "Wazowski.jpeg";
 				break;
@@ -716,15 +717,17 @@ System.out.println(s);
 				break;
 			case "Yeti": theImage = "Yeti.jpeg";
 				break;
-			default: theImage = "Wazowski.jpeg";
-				break;
+			default : theImage ="Wazowski.jpeg";
+			 break;
+			
+		
 			}
 		}
 		Image playerImage = new Image(getClass().getResource(theImage).toExternalForm());
 		player.setImage(playerImage);
-				
+		player1.setImage(playerImage);
+		}
 		
-	}
 
 	public void initializeOppIcon(Role role) {
 		String theImage = null;
@@ -740,33 +743,35 @@ System.out.println(s);
 				break;
 			case "Henry J. Waternoose": theImage = "WaternooseOpp.jpeg";
 				break;
-			default:theImage = "Sullivan.jpeg";
-				break;
-				
+			default : theImage ="Sullivan.jpeg";
+			 break;
+		
 			}
 		}
 		else
 		{
 			switch(game.getOpponent().getName())
+		
 			{
-			case "Mike Wazowski": theImage = "WazowskiOpp.jpeg";
+			case "Mike Wazowski": theImage = "Wazowski.jpeg";
 				break;
-			case"Celia Mae": theImage = "CeliaOpp.jpeg";
+			case"Celia Mae": theImage = "Celia.jpeg";
 				break;
-			case "Fungus": theImage ="FungusOpp.jpeg";
+			case "Fungus": theImage = "Fungus.jpeg";
 				break;
-			case "Yeti": theImage = "YetiOpp.jpeg";
+			case "Yeti": theImage = "Yeti.jpeg";
 				break;
-			default: theImage = "WazowskiOpp.jpeg";
-				break;
-				
+			default : theImage ="Wazowski.jpeg";
+			 break;
+		
 			}
 		}
 		Image oppImage = new Image(getClass().getResource(theImage).toExternalForm());
 		opponent.setImage(oppImage);
+		player2.setImage(oppImage);
+
+		}
 		
-		
-	}
 	
 	public void updateIcons()
 	{
@@ -791,46 +796,38 @@ System.out.println(s);
 		
 	}
 	private void confusedMonsterImage(Monster monster) {
-		String theImage = null;
-		if(monster.getRole().equals(Role.SCARER))
+		String image = null;
+		switch(monster.getName())
 		{
-			switch(monster.getName())
-			{
-			case "James P. Sullivan": theImage = "SullivanOpp.jpeg";
-				break;
-			case"Randall Boggs": theImage = "Randall.jpeg";
-				break;
-			case "Roz": theImage = "Roz.jpeg";
-				break;
-			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
-				break;
-			default:theImage = "Sullivan.jpeg";
-				break;
-				
-			}
+		case "James P. Sullivan": image = "SullivanPlayer.jpeg";
+			break;
+		case "Randall Boggs": image = "Randall.jpeg";
+			break;
+		case "Roz": image = "Roz.jpeg";
+			break;
+		case "Henry J. Waternoose": image = "Waternoose.jpeg";
+			break;
+		case "Mike Wazowski": image = "WazowskiOpp.jpeg";
+			break;
+		case "Celia Mae": image = "CeliaOpp.jpeg";
+			break;
+		case "Fungus": image = "FungusOpp.jpeg";
+			break;
+		case "Yeti": image = "YetiOpp.jpeg";
+			break;
+		default:
+			return;
 		}
-		else
-		{
-			switch(monster.getName())
-			{
-			case "Mike Wazowski": theImage = "Wazowski.jpeg";
-				break;
-			case"Celia Mae": theImage = "Celia.jpeg";
-				break;
-			case "Fungus": theImage ="Fungus.jpeg";
-				break;
-			case "Yeti": theImage = "Yeti.jpeg";
-				break;
-			default: theImage = "Wazowski.jpeg";
-				break;
-				
-			}
+
+		Image monsterImage = new Image(getClass().getResource(image).toExternalForm());
+		if(monster.equals(game.getPlayer())) {
+			player.setImage(monsterImage);
+			player1.setImage(monsterImage);
 		}
-		Image oppImage = new Image(getClass().getResource(theImage).toExternalForm());
-		if(monster.equals(game.getPlayer()))
-			player.setImage(oppImage);
-		else
-			opponent.setImage(oppImage);
+		else {
+			opponent.setImage(monsterImage);
+			player2.setImage(monsterImage);
+		}
 		
 		
 		

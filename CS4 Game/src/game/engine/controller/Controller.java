@@ -796,45 +796,38 @@ public class Controller {
 		
 	}
 	private void confusedMonsterImage(Monster monster) {
-		String Image = null;
-		if(monster.getRole().equals(Role.SCARER))
+		String image = null;
+		switch(monster.getName())
 		{
-			switch(monster.getName())
-			{
-			case "James P. Sullivan": Image = "SullivanPlayer.jpeg";
-				break;
-			case"Randall Boggs": Image = "Randall.jpeg";
-				break;
-			case "Roz": Image = "Roz.jpeg";
-				break;
-			case "Henry J. Waternoose": Image = "Waternoose.jpeg";
-				break;
-			default : Image ="SullivanPlayer.jpeg";
-			 break;
-			}
-				
+		case "James P. Sullivan": image = "SullivanPlayer.jpeg";
+			break;
+		case "Randall Boggs": image = "Randall.jpeg";
+			break;
+		case "Roz": image = "Roz.jpeg";
+			break;
+		case "Henry J. Waternoose": image = "Waternoose.jpeg";
+			break;
+		case "Mike Wazowski": image = "WazowskiOpp.jpeg";
+			break;
+		case "Celia Mae": image = "CeliaOpp.jpeg";
+			break;
+		case "Fungus": image = "FungusOpp.jpeg";
+			break;
+		case "Yeti": image = "YetiOpp.jpeg";
+			break;
+		default:
+			return;
 		}
-		else
-		{	
-			switch(monster.getName())
-			{
-			case "Mike Wazowski": Image = "WazowskiOpp.jpeg";
-				break;
-			case"Celia Mae": Image = "CeliaOpp.jpeg";
-				break;
-			case "Fungus": Image ="FungusOpp.jpeg";
-				break;
-			case "Yeti": Image = "YetiOpp.jpeg";
-				break;
-			 default : Image ="WazowskiOpp.jpeg";
-			 break;
-			}
-			}
-		Image monsterImage = new Image(getClass().getResource(Image).toExternalForm());
-		if(monster.equals(game.getPlayer()))
+
+		Image monsterImage = new Image(getClass().getResource(image).toExternalForm());
+		if(monster.equals(game.getPlayer())) {
 			player.setImage(monsterImage);
-		else
+			player1.setImage(monsterImage);
+		}
+		else {
 			opponent.setImage(monsterImage);
+			player2.setImage(monsterImage);
+		}
 		
 		
 		

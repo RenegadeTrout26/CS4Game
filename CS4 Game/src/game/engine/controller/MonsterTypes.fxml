@@ -6,25 +6,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="808.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.SceneController">
    <children>
-      <TextArea layoutX="108.0" layoutY="88.0" prefHeight="105.0" prefWidth="591.0" text="Dynamo:  Maximum collection, maximum power.&#10;Passive effect: Double all energy transfers (gain or loss) &#10;PowerUp Effect FREEZE: You can Freeze the opponent for one turn." wrapText="true">
+      <TextArea editable="false" layoutX="108.0" layoutY="88.0" prefHeight="105.0" prefWidth="591.0" text="Dynamo:  Maximum collection, maximum power.&#10;Passive effect: Double all energy transfers (gain or loss) &#10;PowerUp Effect FREEZE: You can Freeze the opponent for one turn." wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea layoutX="108.0" layoutY="193.0" prefHeight="127.0" prefWidth="591.0" text="Dasher: Speed and agility are everything. &#10;Passive Effect: you move double the speed of any monster.&#10;PowerUp Effect TRIPLE SPEED: you can dash to the doors quicker by tripling your speed." wrapText="true">
+      <TextArea editable="false" layoutX="108.0" layoutY="193.0" prefHeight="127.0" prefWidth="591.0" text="Dasher: Speed and agility are everything. &#10;Passive Effect: you move double the speed of any monster.&#10;PowerUp Effect TRIPLE SPEED: you can dash to the doors quicker by tripling your speed." wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea layoutX="108.0" layoutY="320.0" prefHeight="127.0" prefWidth="591.0" text="MultiTasker: Slow and steady.&#10;Passive Effect: you move half the speed of any monster, but you gain additional 200 energy whether you gain or lose energy&#10;PowerUp Effect FOCUS MODE: you move at normal speed for 2 turns." wrapText="true">
+      <TextArea editable="false" layoutX="108.0" layoutY="320.0" prefHeight="127.0" prefWidth="591.0" text="MultiTasker: Slow and steady.&#10;Passive Effect: you move half the speed of any monster, but you gain additional 200 energy whether you gain or lose energy&#10;PowerUp Effect FOCUS MODE: you move at normal speed for 2 turns." wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea layoutX="108.0" layoutY="447.0" prefHeight="127.0" prefWidth="591.0" text="Schemer: Every setback is an opportunity. Every loss becomes a gain. Passive Effect: gain additional 10 energy on any gain or lose. &#10;PowerUp Effect STEAL: you can steal from all the stationed monsters and the opponent." wrapText="true">
+      <TextArea editable="false" layoutX="108.0" layoutY="447.0" prefHeight="127.0" prefWidth="591.0" text="Schemer: Every setback is an opportunity. Every loss becomes a gain. Passive Effect: gain additional 10 energy on any gain or lose. &#10;PowerUp Effect STEAL: you can steal from all the stationed monsters and the opponent." wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

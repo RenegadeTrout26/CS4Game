@@ -132,6 +132,7 @@ public class Controller {
 		Cell c = game.getBoard().getBoardCells()[indexToRowCol2(i)[0]][indexToRowCol2(i)[1]];
 		Rectangle r;
 		 monsterCellImage= new ImageView();
+		 doorCellImage = new ImageView();
 		Label l2 = new Label("");
 		if (c instanceof ConveyorBelt)
 			r = new Rectangle(60, 60, Color.GREEN);
@@ -142,15 +143,16 @@ public class Controller {
 
 		else if (c instanceof MonsterCell)
 		{
-			monsterCellImage = new ImageView( new Image(setMonsterCellIcon(((MonsterCell)c).getCellMonster())));
+			//monsterCellImage = new ImageView( new Image(setMonsterCellIcon(((MonsterCell)c).getCellMonster())));
 			r = new Rectangle(60, 60, Color.LIGHTBLUE);	
 			l2 = new Label(""+((MonsterCell)c).getCellMonster().getEnergy());
 			if(((MonsterCell)c).getCellMonster().getRole().equals(Role.LAUGHER))
-			l2.setTextFill(Color.WHITE);
+			l2.setTextFill(Color.BLUE);
 			else
 				l2.setTextFill(Color.INDIANRED);
 		}
 		else if (c instanceof DoorCell){
+			//doorCellImage = new ImageView( new Image(setDoorCellIcon(((DoorCell)c).getRole())));
 			r = new Rectangle(60, 60, Color.MEDIUMPURPLE);
 			l2 = new Label(""+((DoorCell)c).getEnergy());
 			if(((DoorCell)c).getRole().equals(Role.LAUGHER))
@@ -164,14 +166,20 @@ public class Controller {
 		l.setTranslateX(-17); l.setTranslateY(-20);
 		StackPane sp = new StackPane();
 		if(c instanceof DoorCell ) 
-			sp.getChildren().addAll(doorCellImage, l,l2);
+			sp.getChildren().addAll(r, l,l2);
 		else
 			if(c instanceof MonsterCell)
-				sp.getChildren().addAll(monsterCellImage, l,l2);
+				sp.getChildren().addAll(r, l,l2);
 			else
 			sp.getChildren().addAll(r, l);
 		return sp;
 		
+	}
+
+	private String setDoorCellIcon(Role role) {
+		if(role.equals(Role.LAUGHER))
+			return "LaugherDoor";
+		return "ScarerDoor";
 	}
 
 	private StackPane createSockCell(int i) {
@@ -206,7 +214,7 @@ public class Controller {
 		game = new Game(Role.SCARER);
 		sc.switchToGame(e, game);
 		setGame(game);
-		System.out.println("Your Monster is: " + game.getPlayer().getName());
+		System.out.println("\nYour Monster is: " + game.getPlayer().getName());
 		 initializePlayerIcon(Role.SCARER);
 		 initializeOppIcon(Role.LAUGHER);
 	}
@@ -223,7 +231,7 @@ public class Controller {
 		game = new Game(Role.LAUGHER);
 		sc.switchToGame(e, game);
 		setGame(game);
-		System.out.println("Your Monster is: " + game.getPlayer().getName());
+		System.out.println("\nYour Monster is: " + game.getPlayer().getName());
 		 initializePlayerIcon(Role.LAUGHER);
 		 initializeOppIcon(Role.SCARER);
 	}

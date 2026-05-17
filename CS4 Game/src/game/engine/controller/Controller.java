@@ -40,7 +40,7 @@ import javafx.stage.Window;
 public class Controller {
 	
 	private Stage stage;
-	
+	private boolean usedPowerUp;
 	private boolean isExceptionActive;
 	private Game game;
 	public static String tempWord;
@@ -249,6 +249,7 @@ public class Controller {
 		try {
 			if(!isExceptionActive)
 			{
+			
 			Monster curr = game.getCurrent();
 			int ogPos = game.getCurrent().getPosition();
 			String s;
@@ -283,6 +284,7 @@ public class Controller {
 			
 			
 			updateConsole("\n"+ (++counter) +"- "+ s +"'s turn: ");
+			usedPowerUp= false;
 			}
 		} catch (InvalidMoveException e) {
 			updatePlayerUI(game.getPlayer());
@@ -379,12 +381,13 @@ public class Controller {
 	@FXML
 	public void usePowerUpUI(ActionEvent l) {
 		try {
-			if(!isExceptionActive)
+			if(!isExceptionActive && !usedPowerUp)
 			{
 			game.usePowerup();
 			updateOppUI(game.getOpponent());
 			updatePlayerUI(game.getPlayer());
 			updateConsole("Used PowerUp!");
+			usedPowerUp = true;
 		}
 		} catch (Exception e) {
 			
@@ -519,15 +522,15 @@ System.out.println(s);
 		String cardDesc="";
 		switch(Currcard.getName())
 		{
-		case "Position Swap": image = "SwapperCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
-		case "Contamination Code": image = "StartOverCard.jpg";cardDesc=""+Currcard.getDescription(); break;
-		case "2319 Alert": image = "StartOverCard.jpg"; cardDesc=""+Currcard.getDescription();  break;
-		case "Small Snatcher": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
-		case "Sneaky Thief": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
-		case "Mega Drain": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Position Swap": image = "SwapperCard1.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Contamination Code": image = "StartOverCard1.jpg";cardDesc=""+Currcard.getDescription(); break;
+		case "2319 Alert": image = "StartOverCard1.jpg"; cardDesc=""+Currcard.getDescription();  break;
+		case "Small Snatcher": image = "EnergyStealCard50.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Sneaky Thief": image = "EnergyStealCard100.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Mega Drain": image = "EnergyStealCard150.jpg"; cardDesc=""+Currcard.getDescription(); break;
 		case "Super Shield": image = "ShieldCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
-		case "Mind Scramble": image = "ConfusionCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
-		case "Total Confusion": image = "ConfusionCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Mind Scramble": image = "ConfusionCard2.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Total Confusion": image = "ConfusionCard3.jpg"; cardDesc=""+Currcard.getDescription(); break;
 		default: image = "CardBack.jpeg"; 
 		}
 		

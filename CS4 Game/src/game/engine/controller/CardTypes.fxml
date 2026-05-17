@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.engine.controller.SceneController">
+   <children>
+      <ImageView fitHeight="648.0" fitWidth="845.0" layoutX="1.0" layoutY="-6.0">
+         <image>
+            <Image url="@background2.jpg" />
+         </image>
+      </ImageView>
+      <TextArea editable="false" layoutX="109.0" layoutY="70.0" prefHeight="491.0" prefWidth="600.0" text="● Swapper Card (4 cards):&#10;○ Swaps monster with opponent if behind, otherwise no effect.&#10;● Energy Steal Card (Total 6 cards): Steals an amount of energy from the opponent (amount is specified by the card, see table in next page)&#10;○ Shield Protection: Opponent's shield can block the entire steal attempt.&#10;● Start Over Card (Total 5 cards): Can be lucky or not, depending on who is being sent back to the first cell player or opponent!&#10;● Shield Card (5 cards total):&#10;○ Activates shield protection for the current player’s energy.&#10;○ Shield Effect:&#10;■ Blocks the next negative energy loss effect to the entire team&#10;■ Doesn’t protect from schemer’s steal power&#10;○ Shield Removal: Only one shield is available, If the opponent already has the shield, it is removed first before giving the current player the shield.&#10;● Confusion Card (5 cards total):&#10;○ Effect: Swaps the roles of both player and opponent for a specified duration (see table in next page)&#10;○ Duration: Confusion lasts for multiple turns, affecting door interactions during that time.&#10;○ Affects both monsters simultaneously.&#10;" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <Label layoutX="283.0" layoutY="14.0" text="Card Types" textFill="WHITE">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Button fx:id="closeButton" layoutX="378.0" layoutY="590.0" mnemonicParsing="false" onAction="#handleCloseButton" text="Got it!" />
+   </children>
+</AnchorPane>

@@ -672,6 +672,16 @@ System.out.println(s);
         alertStage.show();
     
 }
+    @FXML
+    public void displayCardTypes(ActionEvent event) throws IOException {
+        
+    	Stage alertStage = new Stage();
+    	Parent root = FXMLLoader.load(getClass().getResource("CardTypes.fxml"));
+        Scene scene = new Scene(root);
+        alertStage.setScene(scene);
+        alertStage.show();
+    
+}
     
     
     

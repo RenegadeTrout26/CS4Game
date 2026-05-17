@@ -22,10 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -36,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -85,6 +83,9 @@ public class Controller {
 	
 	@FXML
 	private StackPane cards ;
+	@FXML
+	private StackPane cardsDrawn;
+	private static Card Currcard;
 	
 	public static int  roll;
 
@@ -131,7 +132,7 @@ public class Controller {
 		else if (c instanceof ContaminationSock)
 			return createSockCell(i);
 		else if (c instanceof CardCell)
-			r = new Rectangle(60, 60, Color.RED);
+			r = new Rectangle(60, 60, Color.DARKRED);
 
 		else if (c instanceof MonsterCell)
 		{
@@ -239,8 +240,13 @@ public class Controller {
 			updateOppUI(game.getOpponent());
 			moveUI(curr);
 			
-			
 			updateIcons();
+			if(curr.isConfused())
+				{
+				confusedMonsterImage(game.getPlayer());
+				confusedMonsterImage(game.getOpponent());
+				}
+				
 			if(game.getWinner()!=null)
 				getWinText(l);
 			if(curr==game.getPlayer())
@@ -260,6 +266,8 @@ public class Controller {
 		}
 	}
 
+
+	
 
 	public void resetPos(int pos, Monster curr)
 	{
@@ -461,11 +469,14 @@ public class Controller {
 	{
 		cards.getChildren().clear();
 		Label l = new Label("25");
+		l.setTextFill(Color.WHITE);
 		for (int i = 0; i < 25; i++) {
-			ImageView cardBack = createCardBackView();
 			
+			ImageView cardBack = createCardBackView();
+			cardBack.setTranslateX(-i-0.5);
 			cards.getChildren().add(cardBack);
 		}
+		l.setTranslateY(30);
 		cards.getChildren().add(l);
 	}
 
@@ -477,6 +488,35 @@ public class Controller {
 		cardBack.fitHeightProperty().bind(cards.heightProperty());
 		cardBack.setPreserveRatio(false);
 		return cardBack;
+	}
+	private void createCardFrontView() {
+		String image;
+		String cardDesc="";
+		switch(Currcard.getName())
+		{
+		case "Position Swap": image = "SwapperCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Contamination Code": image = "StartOverCard.jpg";cardDesc=""+Currcard.getDescription(); break;
+		case "2319 Alert": image = "StartOverCard.jpg"; cardDesc=""+Currcard.getDescription();  break;
+		case "Small Snatcher": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Sneaky Thief": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Mega Drain": image = "EnergyStealCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Super Shield": image = "ShieldCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Mind Scramble": image = "ConfusionCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		case "Total Confusion": image = "ConfusionCard.jpg"; cardDesc=""+Currcard.getDescription(); break;
+		default: image = "CardBack.jpeg"; 
+		}
+		
+		TextArea t = new TextArea(cardDesc);
+		StackPane sp =  new StackPane(t);
+		sp.setScaleX(0.85); sp.setScaleY(0.4); sp.setTranslateY(27);
+		t.setWrapText(true);
+		t.setEditable(false);
+		ImageView cardFront = new ImageView(new Image(getClass().getResource(image).toExternalForm()));
+		cardFront.fitWidthProperty().bind(cardsDrawn.widthProperty());
+		cardFront.fitHeightProperty().bind(cardsDrawn.heightProperty());
+		cardFront.setPreserveRatio(false);
+		cardsDrawn.getChildren().addAll(cardFront,sp);
+		cardsDrawn.setScaleX(1.3);cardsDrawn.setScaleY(1.2);
 	}
 
 	public void drawCardUI()
@@ -496,6 +536,14 @@ public class Controller {
 			initializeCardsUI();
 			drawCardUI();
 			}
+		 createCardFrontView();
+		
+	}
+	
+
+	public void setCard(Card c)
+	{
+		Currcard=c;
 	}
 	
 	public void onLandUI(int pos, Cell c)
@@ -740,6 +788,51 @@ public class Controller {
 		System.setOut(new PrintStream(os,true));
 		System.setErr(new PrintStream(os,true));
 
+		
+	}
+	private void confusedMonsterImage(Monster monster) {
+		String theImage = null;
+		if(monster.getRole().equals(Role.SCARER))
+		{
+			switch(monster.getName())
+			{
+			case "James P. Sullivan": theImage = "SullivanOpp.jpeg";
+				break;
+			case"Randall Boggs": theImage = "Randall.jpeg";
+				break;
+			case "Roz": theImage = "Roz.jpeg";
+				break;
+			case "Henry J. Waternoose": theImage = "Waternoose.jpeg";
+				break;
+			default:theImage = "Sullivan.jpeg";
+				break;
+				
+			}
+		}
+		else
+		{
+			switch(monster.getName())
+			{
+			case "Mike Wazowski": theImage = "Wazowski.jpeg";
+				break;
+			case"Celia Mae": theImage = "Celia.jpeg";
+				break;
+			case "Fungus": theImage ="Fungus.jpeg";
+				break;
+			case "Yeti": theImage = "Yeti.jpeg";
+				break;
+			default: theImage = "Wazowski.jpeg";
+				break;
+				
+			}
+		}
+		Image oppImage = new Image(getClass().getResource(theImage).toExternalForm());
+		if(monster.equals(game.getPlayer()))
+			player.setImage(oppImage);
+		else
+			opponent.setImage(oppImage);
+		
+		
 		
 	}
 	

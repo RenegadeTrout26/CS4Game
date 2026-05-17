@@ -14,7 +14,7 @@ public class Board {
 	private static ArrayList<Monster> stationedMonsters; 
 	private static ArrayList<Card> originalCards;
 	public static ArrayList<Card> cards;
-	
+	private static Controller c= new Controller();
 	
 	public Board(ArrayList<Card> readCards) {
 		this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
@@ -122,7 +122,7 @@ public class Board {
 	public static Card drawCard() {
 		if (cards.isEmpty()) 
 			reloadCards();
-		
+		c.setCard(cards.get(0));
 		
 		return cards.remove(0);
 	}

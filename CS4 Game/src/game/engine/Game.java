@@ -94,12 +94,15 @@ public class Game {
 		
 		int roll = rollDice();
 		
-		Controller.setRoll(roll);
+//		Controller.setRoll(roll);
 
-		
 		board.moveMonster(current, roll, getCurrentOpponent());
 		
 		switchTurn();
+		System.out.println("----------------");
+		System.out.println("\nDice Roll: " +roll);
+		System.out.println("----------------");
+		
 	}
 	
 	private void switchTurn() {

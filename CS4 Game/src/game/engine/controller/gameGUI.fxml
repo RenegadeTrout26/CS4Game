@@ -150,7 +150,10 @@
       <Button layoutX="1216.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainMenuButton" prefHeight="57.0" prefWidth="125.0" text="Main Menu" textAlignment="CENTER" textFill="#0f3bff" />
       <TextArea fx:id="console" layoutX="1407.0" layoutY="3.0" prefHeight="963.0" prefWidth="331.0" text="Game Start: &#10;1- Player 1's turn:" wrapText="true" />
       <Line endX="-19.0" endY="51.0" layoutX="1429.0" layoutY="911.0" startX="-19.0" startY="-911.0" />
-      <StackPane fx:id="cards" layoutX="614.0" layoutY="35.0" prefHeight="150.0" prefWidth="134.0" />
+      <StackPane fx:id="cards" layoutX="614.0" layoutY="35.0" prefHeight="150.0" prefWidth="134.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000017" height="158.0" stroke="#03030378" strokeType="INSIDE" width="161.0" />
+         </children></StackPane>
       <Button layoutX="958.0" layoutY="898.0" mnemonicParsing="false" onAction="#displayMonsterTypes" text="?" />
       <ImageView fx:id="player1" fitHeight="179.0" fitWidth="66.0" layoutX="58.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -166,7 +169,7 @@
       <ProgressBar fx:id="oppEnergy" layoutX="1176.0" layoutY="473.0" prefHeight="15.0" prefWidth="46.0" progress="0.0" rotate="270.0" />
       <StackPane fx:id="cardsDrawn" layoutX="72.0" layoutY="630.0" prefHeight="274.0" prefWidth="201.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000007" height="294.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000007" height="294.0" stroke="#00000069" strokeType="INSIDE" width="200.0" />
          </children></StackPane>
    </children>
 </AnchorPane>

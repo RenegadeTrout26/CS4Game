@@ -235,7 +235,7 @@ public class Controller {
 			
 			game.playTurn();
 			
-			updateConsole( "\nDice Roll: "+Controller.roll);
+			//updateConsole( "\nDice Roll: "+Controller.roll);
 			updatePlayerUI(game.getPlayer());
 			updateOppUI(game.getOpponent());
 			moveUI(curr);
@@ -440,8 +440,8 @@ public class Controller {
 	}
 	public void updateConsole(String s)
 	{
-
-		console.appendText(s);
+System.out.println(s);
+//		console.appendText(s);
 		console.positionCaret(console.getText().length());
 		
 	}
@@ -786,7 +786,7 @@ public class Controller {
 			
 		};
 		System.setOut(new PrintStream(os,true));
-		System.setErr(new PrintStream(os,true));
+		//System.setErr(new PrintStream(os,true));
 
 		
 	}

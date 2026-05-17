@@ -110,6 +110,7 @@ public class SceneController {
 	    controller.boardUI();
 	    controller.initializeCardsUI();
 	    controller.initializeMonsterImages();
+	    controller.getJavaConsole();
 	   
     scene.setOnKeyPressed( new EventHandler<KeyEvent>(){
 

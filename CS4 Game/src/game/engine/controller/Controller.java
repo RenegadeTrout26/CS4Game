@@ -133,13 +133,17 @@ public class Controller {
 		Rectangle r;
 		 monsterCellImage= new ImageView();
 		 doorCellImage = new ImageView();
+		// ImageView cardBack = new ImageView(new Image("CardBack.jpeg"));
+		 
 		Label l2 = new Label("");
 		if (c instanceof ConveyorBelt)
 			r = new Rectangle(60, 60, Color.GREEN);
 		else if (c instanceof ContaminationSock)
 			return createSockCell(i);
 		else if (c instanceof CardCell)
-			r = new Rectangle(60, 60, Color.DARKRED);
+			{r = new Rectangle(60, 60, Color.DARKRED);
+			
+			}
 
 		else if (c instanceof MonsterCell)
 		{
@@ -171,6 +175,11 @@ public class Controller {
 			if(c instanceof MonsterCell)
 				sp.getChildren().addAll(r, l,l2);
 			else
+				if(c instanceof CardCell)
+				{
+					sp.getChildren().addAll(r,l);
+				}
+				else
 			sp.getChildren().addAll(r, l);
 		return sp;
 		

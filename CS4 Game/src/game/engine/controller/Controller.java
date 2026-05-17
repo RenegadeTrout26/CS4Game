@@ -762,9 +762,6 @@ public class Controller {
 		opponent.setImage(oppImage);
 		}
 		
-		
-		
-	}
 	
 	public void updateIcons()
 	{

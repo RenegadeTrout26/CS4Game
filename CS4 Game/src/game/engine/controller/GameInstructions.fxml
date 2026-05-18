@@ -32,7 +32,7 @@
       <!-- Done Button with image -->
       <Button layoutX="1074.0" layoutY="837.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="64.0" prefWidth="105.0" text="">
          <graphic>
-            <ImageView fitWidth="105" fitHeight="64" preserveRatio="false" pickOnBounds="true">
+            <ImageView fitHeight="64" fitWidth="105" pickOnBounds="true" preserveRatio="false">
                <image>
                   <Image url="@doneButton.jpg" />
                </image>
@@ -51,8 +51,8 @@
       <Circle fill="#d311ff" layoutX="1197.0" layoutY="299.0" radius="19.0" stroke="#c73099" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#06ff4c" height="38.0" layoutX="1175.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#08b2ff" height="45.0" layoutX="1175.0" layoutY="335.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff080b" height="45.0" layoutX="1175.0" layoutY="406.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00862f" height="45.0" layoutX="1175.0" layoutY="487.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c91a1d" height="45.0" layoutX="1175.0" layoutY="406.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8bffb4" height="45.0" layoutX="1175.0" layoutY="487.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9f0a" height="45.0" layoutX="1175.0" layoutY="565.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
       <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="1170.0" layoutY="218.0">
          <image>

@@ -22,5 +22,6 @@ public abstract class TransportCell extends Cell {
 	public void onLand(Monster landingMonster, Monster opponentMonster) {
 		super.onLand(landingMonster, opponentMonster);
 		transport(landingMonster);
+		System.out.println("You landed on " +((this instanceof ConveyorBelt)?"Conveyor Belt":"Contamination Sock")+ " and was transported");
 	}
 }

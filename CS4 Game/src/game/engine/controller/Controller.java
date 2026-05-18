@@ -116,13 +116,13 @@ public class Controller {
         Label l2 = new Label("");
 
         if (c instanceof ConveyorBelt) {
-            r = new Rectangle(60, 60, Color.GREEN);
+            r = new Rectangle(60, 60, Color.LIGHTGREEN);
 
         } else if (c instanceof ContaminationSock) {
             return createSockCell(i);
 
         } else if (c instanceof CardCell) {
-            r = new Rectangle(60, 60, Color.DARKRED);
+            r = new Rectangle(60, 60, Color.INDIANRED);
              cardCellImage = new ImageView(getCachedImage("CardBack.jpeg"));
             cardCellImage.setFitWidth(20);
             cardCellImage.setFitHeight(30);
@@ -136,7 +136,7 @@ public class Controller {
             monsterCellImage.setPreserveRatio(false);
             r = new Rectangle(60, 60, Color.LIGHTBLUE);
             l2 = new Label("" + ((MonsterCell) c).getCellMonster().getEnergy());
-           l2.setTranslateY(25);
+           l2.setTranslateY(22);
                 l2.setTextFill(Color.WHITE);
         
 
@@ -148,7 +148,7 @@ public class Controller {
             doorCellImage.setPreserveRatio(false);
             r = new Rectangle(60, 60, Color.MEDIUMPURPLE);
             l2 = new Label("" + ((DoorCell) c).getEnergy());
-            l2.setTranslateY(25);
+            l2.setTranslateY(22);
                 l2.setTextFill(Color.GHOSTWHITE);
             
 
@@ -254,7 +254,7 @@ public class Controller {
                 else
                     s = "Player 1";
 
-                updateConsole("\n" + (++counter) + "- " + s + "'s turn: ");
+                updateConsole("\n----------------------------------------\n" + (++counter) + "- " + s + "'s turn: ");
                 usedPowerUp = false;
             }
         } catch (InvalidMoveException e) {
@@ -283,14 +283,17 @@ public class Controller {
         cells[pos].getChildren().add(s);
     }
 
-    public void updateDoorCells(int i) {
-        StackPane sp = cells[i];
+    public void updateDoorCells(int i, DoorCell c) {
+        if(c.isActivated())
+        {
+    	StackPane sp = cells[i];
         sp.getChildren().clear();
         Rectangle r = new Rectangle(60, 60, Color.YELLOW);
         Label l = new Label(i + " ");
         l.setTranslateX(-17);
         l.setTranslateY(-20);
         sp.getChildren().addAll(r, l);
+        }
     }
 
     public static void setRoll(int rol) {
@@ -304,10 +307,9 @@ public class Controller {
                 StackPane sp = cells[i];
                 Label l2 = (Label) sp.getChildren().remove(sp.getChildren().size() - 1);
                 l2 = new Label("" + ((MonsterCell) c).getCellMonster().getEnergy());
-                if (((MonsterCell) c).getCellMonster().getRole().equals(Role.LAUGHER))
-                    l2.setTextFill(Color.BLUE);
-                else
-                    l2.setTextFill(Color.INDIANRED);
+                l2.setTranslateY(22);
+                l2.setTextFill(Color.WHITE);
+               
                 sp.getChildren().add(l2);
             }
         }
@@ -402,10 +404,11 @@ public class Controller {
   
     public void getWinText(ActionEvent e) throws IOException {
         if (game.getWinner() == game.getPlayer())
-            sc.switchToGameOver(e, "YOU WON!" + "\nPlayer Energy: " + game.getPlayer().getEnergy()
+            sc.switchToGameOver(e, "YOU WON!\n" + game.getPlayer().getOriginalRole()+" WINS\n"+game.getPlayer().getName()+ "\nPlayer Energy: " + game.getPlayer().getEnergy()
                     + "\nOpponent Energy: " + game.getOpponent().getEnergy());
         else
-            sc.switchToGameOver(e, "YOU LOSE!" + "\nPlayer Energy: " + game.getPlayer().getEnergy()
+            sc.switchToGameOver(e, "YOU LOSE!\n"+game.getOpponent().getOriginalRole()+" WINS\n" + game.getOpponent().getName()+ "\nPlayer Energy: " + game.getPlayer().getEnergy()
+            		
                     + "\nOpponent Energy: " + game.getOpponent().getEnergy());
     }
 
@@ -490,7 +493,7 @@ public class Controller {
     
     public void onLandUI(int pos, Cell c) {
         if (c instanceof DoorCell) {
-            updateDoorCells(pos);
+            updateDoorCells(pos,(DoorCell)c);
             updateConsole("\nYou landed on Door Cell " + pos);
         } else if (c instanceof MonsterCell) {
             updateMonsterCells();
@@ -568,10 +571,11 @@ public class Controller {
     public void switchToWinScreen(KeyEvent e) throws IOException {
         sc.setStage(getStage());
         if (game.getPlayer().getEnergy() >= game.getOpponent().getEnergy())
-            sc.switchToGameOver(e, "YOU WON!" + "\nPlayer Energy: " + game.getPlayer().getEnergy()
+        	sc.switchToGameOver(e, "YOU WON!\n" + game.getPlayer().getOriginalRole()+" WINS\n"+game.getPlayer().getName()+ "\nPlayer Energy: " + game.getPlayer().getEnergy()
                     + "\nOpponent Energy: " + game.getOpponent().getEnergy());
         else
-            sc.switchToGameOver(e, "YOU LOSE!" + "\nPlayer Energy: " + game.getPlayer().getEnergy()
+            sc.switchToGameOver(e, "YOU LOSE!\n"+game.getOpponent().getOriginalRole()+" WINS\n" + game.getOpponent().getName()+ "\nPlayer Energy: " + game.getPlayer().getEnergy()
+            		
                     + "\nOpponent Energy: " + game.getOpponent().getEnergy());
     }
 
@@ -656,18 +660,18 @@ public class Controller {
         initializeOppIcon(game.getOpponent().getRole());
     }
 
-    public void getJavaConsole() {
-        OutputStream os = new OutputStream() {
-            public void write(int arg0) throws IOException {
-                console.appendText("" + (char) arg0);
-                Platform.runLater(() -> {
-                    console.positionCaret(console.getText().length());
-                    console.setScrollTop(Double.MAX_VALUE);
-                });
-            }
-        };
-        System.setOut(new PrintStream(os, true));
-    }
+	    public void getJavaConsole() {
+	        OutputStream os = new OutputStream() {
+	            public void write(int arg0) throws IOException {
+	                console.appendText("" + (char) arg0);
+	                Platform.runLater(() -> {
+	                    console.positionCaret(console.getText().length());
+	                    console.setScrollTop(Double.MAX_VALUE);
+	                });
+	            }
+	        };
+	        System.setOut(new PrintStream(os, true));
+	    }
 
     private void confusedMonsterImage(Monster monster) {
         String image;

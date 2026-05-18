@@ -24,12 +24,6 @@ public class SceneController {
     @FXML
     private Button closeButton = new Button();
 
-
-
-
-
-    
-
     @FXML
     public void switchToChooseRole(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ChooseRole.fxml"));
@@ -122,10 +116,18 @@ public class SceneController {
 
    
 
-    public TextArea getGameOverMSG()        { return GameOverMSG; }
-    public void setGameOverMSG(TextArea t)  { GameOverMSG = t; }
-    public void setStage(Stage s)           { stage = s; }
-    public Stage getStage()                 { return stage; }
+    public TextArea getGameOverMSG()        {
+    	return GameOverMSG;
+    	}
+    public void setGameOverMSG(TextArea t)  {
+    	GameOverMSG = t; 
+    	}
+    public void setStage(Stage s)           { 
+    	stage = s; 
+    	}
+    public Stage getStage()                 { 
+    	return stage; 
+    	}
 
   
 

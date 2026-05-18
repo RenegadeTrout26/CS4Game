@@ -16,8 +16,21 @@
          </image>
       </ImageView>
 
-      <Button layoutX="160.0" layoutY="533.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="66.0" prefWidth="119.0" text="Try Again" />
+      <!-- Try Again Button -->
+      <Button layoutX="160.0" layoutY="533.0" mnemonicParsing="false" onAction="#switchToChooseRole" prefHeight="66.0" prefWidth="119.0" text="">
+         <graphic>
+            <ImageView fitWidth="119" fitHeight="66" preserveRatio="false" pickOnBounds="true">
+               <image>
+                  <Image url="@tryAgainButton.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets />
+         </padding>
+      </Button>
 
+      <!-- Quit Button -->
       <Button fx:id="closeButton" layoutX="513.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="66.0" prefWidth="113.0" text="">
          <graphic>
             <ImageView fitWidth="113" fitHeight="66" preserveRatio="false" pickOnBounds="true">
@@ -36,7 +49,6 @@
             <Font size="20.0" />
          </font>
       </TextArea>
-
       <Label layoutX="418.0" layoutY="305.0" prefHeight="101.0" prefWidth="333.0" rotate="19.4" text="GAME OVER!" textFill="#2582c5">
          <font>
             <Font size="53.0" />
